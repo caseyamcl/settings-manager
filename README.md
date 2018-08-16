@@ -7,17 +7,46 @@
 [![Quality Score][ico-code-quality]][link-code-quality]
 [![Total Downloads][ico-downloads]][link-downloads]
 
-This is a library that provides a framework for managing and storing user-changeable settings.  It provides the
-following:
+This is a framework-agnostic library that provides a structure for managing and storing user-changeable settings.  
+It provides the following common utilities:
 
-* A framework for defining settings
+* Class-based definition for settings
+* A registry for settings
+* Ability to define multiple providers for settings
+* 
 
-# TODO: Using with Symfony
+## What is a setting?
 
-# TODO: Using with Laravel
+This library is useful for projects that make a clear distinction between configuration values (set by admins)
+and settings (available in the app; changeable by users):
 
-# TODO: Using with PHP-DI
+| Configuration Value                                                                              | Setting                                                            |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------ |
+| Set on the command line in a YAML/JSON/INI file or environment variable during application setup | Set in the application's API or web interface                      |
+| Managed by system administrator or developer                                                     | Managed by application user                                        |
+| Not likely to ever change                                                                        | Mutable and likely to change often                                 |
+| Should be set before application can be executed                                                 | Not necessary during app bootstrap                                 |
 
+## Concepts
+
+TODO: Describe providers, settings, and setting values.
+
+## Install
+
+Via Composer
+
+``` bash
+$ composer require caseyamcl/settings_manager
+```
+
+
+## Usage
+
+### TODO: Using with Symfony
+
+### TODO: Using with Laravel
+
+### TODO: Using with PHP-DI
 
 
 ## Structure
@@ -32,20 +61,6 @@ tests/
 vendor/
 ```
 
-
-## Install
-
-Via Composer
-
-``` bash
-$ composer require caseyamcl/settings_manager
-```
-
-## Usage
-
-```php
-// TODO: This..
-```
 
 ## Change log
 
