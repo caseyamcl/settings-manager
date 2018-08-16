@@ -1,16 +1,27 @@
 <?php
+/**
+ * Settings Manager
+ *
+ * @license http://opensource.org/licenses/MIT
+ * @link https://github.com/caseyamcl/settings_manager
+ * @package caseyamcl/settings_manager
+ * @author Casey McLaughlin <caseyamcl@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ *  ------------------------------------------------------------------
+ */
 
 namespace SettingsManager\Registry;
 
-use FSURCC\AccountingSystem\Core\Container\Contract\RegistryInterface;
 use SettingsManager\Contract\SettingInterface;
 use SettingsManager\Exception\ImmutableSettingOverrideException;
 
 /**
  * Class SettingDefinitionRegistry
- * @package FSURCC\AccountingSystem\Core\Setting\Registry
  */
-class SettingDefinitionRegistry implements \IteratorAggregate, RegistryInterface
+class SettingDefinitionRegistry implements \IteratorAggregate
 {
     /**
      * @var \ArrayIterator|SettingInterface[]

@@ -1,4 +1,17 @@
 <?php
+/**
+ * Settings Manager
+ *
+ * @license http://opensource.org/licenses/MIT
+ * @link https://github.com/caseyamcl/settings_manager
+ * @package caseyamcl/settings_manager
+ * @author Casey McLaughlin <caseyamcl@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ *  ------------------------------------------------------------------
+ */
 
 namespace SettingsManager\Exception;
 
@@ -6,7 +19,6 @@ use SettingsManager\Contract\SettingInterface;
 
 /**
  * Class SettingNameCollisionException
- * @package FSURCC\AccountingSystem\Core\Setting\Exception
  */
 class ImmutableSettingOverrideException extends \LogicException
 {
