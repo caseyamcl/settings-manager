@@ -4,14 +4,6 @@ All notable changes to *Settings Manager* will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
-## [UNRELEASED]
+## [0.1] - 2018-08-16 
 ### Added
-- Nothing
-### Deprecated
-- Nothing
-### Fixed
-- Nothing
-### Removed
-- Nothing
-### Security
-- Nothing
+- Everything; initial development release
