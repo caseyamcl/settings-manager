@@ -1,0 +1,7 @@
+# Development Stuff
+build
+composer.lock
+vendor
+
+# IDE Stuff
+.idea
