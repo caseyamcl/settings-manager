@@ -56,6 +56,9 @@ class ArraySettingProvider implements SettingsProviderInterface
         string $displayName
     ) {
 
+        $this->name = $name;
+        $this->displayName = $displayName;
+
         // Validate all of the settings as they are read from the input
         foreach ($settings as $settingName => $value) {
             $value = (is_array($value) && isset($value['value'])) ? $value['value'] : $value;
@@ -68,9 +71,6 @@ class ArraySettingProvider implements SettingsProviderInterface
                 $definitionRegistry->get($settingName)->processValue($value)
             );
         }
-
-        $this->name = $name;
-        $this->displayName = $displayName;
     }
 
     /**
