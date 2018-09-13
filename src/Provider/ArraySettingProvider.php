@@ -57,15 +57,15 @@ class ArraySettingProvider implements SettingsProviderInterface
     ) {
 
         // Validate all of the settings as they are read from the input
-        foreach ($settings as $name => $value) {
+        foreach ($settings as $settingName => $value) {
             $value = (is_array($value) && isset($value['value'])) ? $value['value'] : $value;
             $mutable = (is_array($value) && isset($value['mutable'])) ? (bool) $value['mutable'] : true;
 
-            $this->settings[$name] = new SettingValue(
-                $name,
+            $this->settings[$settingName] = new SettingValue(
+                $settingName,
                 $this,
                 $mutable,
-                $definitionRegistry->get($name)->processValue($value)
+                $definitionRegistry->get($settingName)->processValue($value)
             );
         }
 
