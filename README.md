@@ -26,7 +26,7 @@ and settings (available in the app; changeable by users):
 | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------ |
 | Set on the command line in a YAML/JSON/INI file or environment variable during application setup | Set in the application's API or web interface                      |
 | Managed by system administrator or developer                                                     | Managed by application user                                        |
-| Not likely to ever change                                                                        | Mutable and likely to change often                                 |
+| Not likely to ever change                                                                        | Mutable and able to change during runtime                          |
 | Should be set before application can be executed                                                 | Not necessary during app bootstrap                                 |
 
 ## Concepts
