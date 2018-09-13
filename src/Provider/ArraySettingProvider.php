@@ -17,6 +17,7 @@ namespace SettingsManager\Provider;
 
 use SettingsManager\Contract\SettingsProviderInterface;
 use SettingsManager\Contract\SettingValueInterface;
+use SettingsManager\Model\SettingValue;
 use SettingsManager\Registry\SettingDefinitionRegistry;
 
 /**
@@ -57,7 +58,15 @@ class ArraySettingProvider implements SettingsProviderInterface
 
         // Validate all of the settings as they are read from the input
         foreach ($settings as $name => $value) {
-            $this->settings[$name] = $definitionRegistry->get($name)->processValue($value);
+            $value = (is_array($value) && isset($value['value'])) ? $value['value'] : $value;
+            $mutable = (is_array($value) && isset($value['mutable'])) ? (bool) $value['mutable'] : true;
+
+            $this->settings[$name] = new SettingValue(
+                $name,
+                $this,
+                $mutable,
+                $definitionRegistry->get($name)->processValue($value)
+            );
         }
 
         $this->name = $name;

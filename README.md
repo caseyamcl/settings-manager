@@ -8,12 +8,14 @@
 [![Total Downloads][ico-downloads]][link-downloads]
 
 This is a framework-agnostic library that provides a structure for managing and storing user-changeable settings.  
+Settings can be stored in a configuration file, database, external API or anywhere else! 
+
 It provides the following common utilities:
 
 * Class-based definition for settings
 * A registry for settings
 * Ability to define multiple providers for settings
-* 
+* Ability to validate and prepare/transform setting values 
 
 ## What is a setting?
 
@@ -29,7 +31,17 @@ and settings (available in the app; changeable by users):
 
 ## Concepts
 
-TODO: Describe providers, settings, and setting values.
+A **Setting** is simply a PHP class that implements the `SettingInterface` interface.  A setting has the
+following attributes:
+
+* A name (e.g. a machine name/slug)
+* A display name
+* Internal notes
+* An optional default value
+* Optional validation/transform logic for processing incoming values
+
+A **Setting Provider** is a service class that loads setting values.  Multiple providers can be chained together so that
+setting values are loaded in a cascading way.
 
 ## Install
 
