@@ -49,6 +49,12 @@ interface SettingInterface
     public function getDefault();
 
     /**
+     * Should this setting value be exposed in the API as-is, or masked/hidden?
+     * @return bool
+     */
+    public function isSensitive(): bool;
+
+    /**
      * Process, validate, and store a new value
      *
      * @param mixed $value  The raw value

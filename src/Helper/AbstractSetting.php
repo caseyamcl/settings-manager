@@ -26,32 +26,53 @@ abstract class AbstractSetting implements SettingInterface
     const DISPLAY_NAME = null;
     const NOTES = '';
     const DEFAULT = null;
+    const SENSITIVE = false;
 
+    /**
+     * @return string
+     */
     public function getName(): string
     {
         return $this->requireConstant('NAME');
     }
 
+    /**
+     * @return string
+     */
     public function getDisplayName(): string
     {
         return $this->requireConstant('DISPLAY_NAME');
     }
 
+    /**
+     * @return string
+     */
     public function getNotes(): string
     {
         return static::NOTES;
     }
 
+    /**
+     * @return mixed|null
+     */
     public function getDefault()
     {
         return static::DEFAULT;
     }
 
     /**
+     * @return bool
+     */
+    public function isSensitive(): bool
+    {
+        return static::SENSITIVE;
+    }
+
+    /**
      * @param string $name
      * @return mixed
      */
-    private final function requireConstant(string $name)
+    final private function requireConstant(string $name)
     {
         if ($constant = constant(get_called_class() . '::' . $name)) {
             return $constant;
