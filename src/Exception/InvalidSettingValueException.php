@@ -26,7 +26,7 @@ use Throwable;
  *
  * @author Casey McLaughlin <caseyamcl@gmail.com>
  */
-class InvalidSettingValueException extends RuntimeException
+class InvalidSettingValueException extends RuntimeException implements SettingException
 {
     /**
      * @var array|string[]

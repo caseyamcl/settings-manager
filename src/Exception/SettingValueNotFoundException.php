@@ -14,7 +14,7 @@ use Throwable;
  *
  * @author Casey McLaughlin <caseyamcl@gmail.com>
  */
-class SettingValueNotFoundException extends RuntimeException
+class SettingValueNotFoundException extends RuntimeException implements SettingException
 {
     /**
      * Construct instance using setting name

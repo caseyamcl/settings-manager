@@ -20,7 +20,7 @@ It provides the following common utilities:
 ## What is a setting?
 
 This library is useful for projects that make a clear distinction between configuration values (set by admins)
-and settings (available in the app; changeable by users):
+and settings (available in the app; changeable by users during runtime):
 
 | Configuration Value                                                                              | Setting                                                            |
 | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------ |
@@ -31,8 +31,8 @@ and settings (available in the app; changeable by users):
 
 ## Concepts
 
-A **Setting** is simply a PHP class that implements the `SettingInterface` interface.  A setting has the
-following attributes:
+A **Setting** is simply a PHP class that implements the `SettingDefinitionInterface` interface.
+A setting has the following attributes:
 
 * A name (e.g. a machine name/slug)
 * A display name
@@ -51,28 +51,9 @@ Via Composer
 $ composer require caseyamcl/settings-manager
 ```
 
-
 ## Usage
 
-### TODO: Using with Symfony
-
-### TODO: Using with Laravel
-
-### TODO: Using with PHP-DI
-
-
-## Structure
-
-If any of the following are applicable to your project, then the directory structure should follow industry best practices by being named the following.
-
-```
-bin/        
-config/
-src/
-tests/
-vendor/
-```
-
+TODO: Usage
 
 ## Change log
 

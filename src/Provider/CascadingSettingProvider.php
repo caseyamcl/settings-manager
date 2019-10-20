@@ -38,6 +38,17 @@ class CascadingSettingProvider implements SettingProviderInterface
     private $providers;
 
     /**
+     * Alternate constructor
+     *
+     * @param SettingProviderInterface[] $provider
+     * @return CascadingSettingProvider
+     */
+    public static function build(SettingProviderInterface ...$provider): self
+    {
+        return new static($provider);
+    }
+
+    /**
      * CascadeProvider constructor.
      * @param iterable $providers
      */

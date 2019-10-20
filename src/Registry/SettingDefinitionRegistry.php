@@ -20,7 +20,7 @@ use ArrayIterator;
 use IteratorAggregate;
 use RuntimeException;
 use SettingsManager\Contract\SettingDefinitionInterface;
-use SettingsManager\Exception\ImmutableSettingOverrideException;
+use SettingsManager\Exception\SettingNameCollisionException;
 
 /**
  * Class SettingDefinitionRegistry
@@ -34,10 +34,15 @@ class SettingDefinitionRegistry implements IteratorAggregate
 
     /**
      * SettingDefinitionRegistry constructor.
+     * @param iterable|SettingDefinitionInterface[]|null $items
      */
-    public function __construct()
+    public function __construct(?iterable $items = [])
     {
         $this->items = new ArrayIterator([]);
+
+        foreach ($items as $item) {
+            $this->add($item);
+        }
     }
 
     /**
@@ -63,15 +68,19 @@ class SettingDefinitionRegistry implements IteratorAggregate
     }
 
     /**
+     * Add a setting definition to the registry
+     *
      * @param SettingDefinitionInterface $setting
+     * @return SettingDefinitionRegistry
      */
-    public function add(SettingDefinitionInterface $setting)
+    public function add(SettingDefinitionInterface $setting): self
     {
         if ($this->items->offsetExists($setting->getName()) && $setting !== $this->items[$setting->getName()]) {
-            throw new ImmutableSettingOverrideException('Setting name collision: ' . $setting->getName());
+            throw SettingNameCollisionException::fromName($setting->getName());
         }
 
         $this->items[$setting->getName()] = $setting;
+        return $this;
     }
 
     /**

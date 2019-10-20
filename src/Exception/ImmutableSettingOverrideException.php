@@ -28,7 +28,7 @@ use Throwable;
  *
  * @author Casey McLaughlin <caseyamcl@gmail.com>
  */
-class ImmutableSettingOverrideException extends LogicException
+class ImmutableSettingOverrideException extends LogicException implements SettingException
 {
     /**
      * @param string $settingName

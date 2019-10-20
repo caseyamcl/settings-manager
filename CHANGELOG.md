@@ -17,6 +17,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
     - `SettingInterface` to `SettingDefinitionInterface`
     - `AbstractSetting` to `AbstractSettingDefinition`
 - Change in default behavior: Assume all settings are sensitive by default
+- Adding multiple settings with the same name throws a `SettingNameCollisionException` instead of a half-baked
+  `ImmutableSettingOverrideException`
+- Added common interface for all exceptions: `SettingException`
+
 ### Removed
 - `SettingDefinitionRegistry::addItem()` (seemed unused)
 

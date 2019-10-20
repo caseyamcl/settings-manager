@@ -71,7 +71,7 @@ class DefaultValuesProvider implements SettingProviderInterface
     public function getSettingValues(): iterable
     {
         foreach ($this->registry->getIterator() as $setting) {
-            $out[] = new SettingValue($setting->getName(), $this, true, $setting->getDefault());
+            $out[$setting->getName()] = new SettingValue($setting->getName(), $this, true, $setting->getDefault());
         }
 
         return $out ?? [];
