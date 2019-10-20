@@ -24,7 +24,7 @@ use SettingsManager\Exception\ImmutableSettingOverrideException;
 /**
  * Cascading setting provider
  *
- * Reads settings from multiple providers
+ * Reads settings from multiple providers.  This is an immutable object, but it is clone-able (via the `with()` method)
  *
  * @author Casey McLaughlin <caseyamcl@gmail.com>
  */
@@ -36,6 +36,11 @@ class CascadingSettingProvider implements SettingProviderInterface
      * @var array|SettingProviderInterface[]
      */
     private $providers;
+
+    /**
+     * @var array|SettingValueInterface[]
+     */
+    private $valuesCache = [];
 
     /**
      * Alternate constructor
@@ -61,7 +66,24 @@ class CascadingSettingProvider implements SettingProviderInterface
 
     private function add(SettingProviderInterface $provider)
     {
-        $this->providers[] = $provider;
+        $this->providers[$provider->getName()] = $provider;
+
+        // Initialize setting values
+        foreach ($provider->getSettingValues() as $value) {
+            $valueCollision = array_key_exists($value->getSettingName(), $this->valuesCache)
+                && (! $this->valuesCache[$value->getSettingName()]->isMutable());
+
+            // If the setting is already in the out array and is immutable, throw exception.
+            if ($valueCollision) {
+                throw ImmutableSettingOverrideException::build(
+                    $value->getSettingName(),
+                    $provider->getName(),
+                    $this->valuesCache[$value->getSettingName()]->getProviderName()
+                );
+            }
+
+            $this->valuesCache[$value->getSettingName()] = $value;
+        }
     }
 
     /**
@@ -87,32 +109,28 @@ class CascadingSettingProvider implements SettingProviderInterface
      */
     public function getSettingValues(): iterable
     {
-        $out = [];
-
-        foreach ($this->providers as $provider) {
-            foreach ($provider->getSettingValues() as $value) {
-                // If the setting is already in the out array and is immutable, throw exception.
-                if (array_key_exists($value->getSettingName(), $out) && ! $value->isMutable()) {
-                    throw ImmutableSettingOverrideException::build(
-                        $value->getSettingName(),
-                        $provider->getName(),
-                        $out[$value->getSettingName()]->getProviderName()
-                    );
-                }
-
-                $out[$value->getSettingName()] = $value;
-            }
-        }
-
-        return $out ?? [];
+        return $this->valuesCache;
     }
 
     /**
      * @param string $name
      * @return SettingProviderInterface|null
      */
-    public function findSettingValue(string $name): ?SettingValueInterface
+    public function findValueInstance(string $name): ?SettingValueInterface
     {
         return $this->getSettingValues()[$name] ?? null;
+    }
+
+    /**
+     * Clone this, adding a provider to the cloned instance
+     *
+     * @param SettingProviderInterface $provider
+     * @return $this
+     */
+    public function withProvider(SettingProviderInterface $provider): self
+    {
+        $that = clone $this;
+        $that->add($provider);
+        return $that;
     }
 }

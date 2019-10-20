@@ -95,7 +95,7 @@ class SettingRepositoryProvider implements SettingProviderInterface
         return $out ?? [];
     }
 
-    public function findSettingValue(string $settingName): ?SettingValueInterface
+    public function findValueInstance(string $settingName): ?SettingValueInterface
     {
         return ($value = $this->repository->findValue($settingName))
             ? new SettingValue($settingName, $this, true, $value)

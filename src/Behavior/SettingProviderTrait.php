@@ -32,9 +32,9 @@ trait SettingProviderTrait
      * @param string $settingName
      * @return SettingValueInterface
      */
-    public function getSettingValue(string $settingName): SettingValueInterface
+    public function getValueInstance(string $settingName): SettingValueInterface
     {
-        if ($value = $this->findSettingValue($settingName)) {
+        if ($value = $this->findValueInstance($settingName)) {
             return $value;
         } else {
             throw SettingValueNotFoundException::fromName($settingName);
@@ -49,7 +49,7 @@ trait SettingProviderTrait
      */
     public function getValue(string $settingName)
     {
-        return $this->getSettingValue($settingName)->getValue();
+        return $this->getValueInstance($settingName)->getValue();
     }
 
     /**
@@ -60,7 +60,7 @@ trait SettingProviderTrait
      */
     public function findValue(string $settingName)
     {
-        if ($setting = $this->findSettingValue($settingName)) {
+        if ($setting = $this->findValueInstance($settingName)) {
             return $setting->getValue();
         } else {
             return null;
@@ -73,5 +73,5 @@ trait SettingProviderTrait
      * @param string $settingName
      * @return SettingValueInterface|null
      */
-    abstract public function findSettingValue(string $settingName): ?SettingValueInterface;
+    abstract public function findValueInstance(string $settingName): ?SettingValueInterface;
 }

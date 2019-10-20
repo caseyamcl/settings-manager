@@ -21,8 +21,8 @@ class StringSetting extends AbstractSettingDefinition
      */
     public function processValue($value)
     {
-        if ($value !== 'test') {
-            throw new InvalidSettingValueException(['value must equal "test"']);
+        if (substr('test', 0, 4) !== 'test') {
+            throw new InvalidSettingValueException(['value must begin with "test"']);
         }
 
         return $value;

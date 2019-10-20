@@ -68,8 +68,8 @@ class ArraySettingProvider implements SettingProviderInterface
 
         // Validate all of the settings as they are read from the input
         foreach ($settings as $settingName => $value) {
-            $value = (is_array($value) && isset($value['value'])) ? $value['value'] : $value;
             $mutable = (is_array($value) && isset($value['mutable'])) ? (bool) $value['mutable'] : true;
+            $value = (is_array($value) && isset($value['value'])) ? $value['value'] : $value;
 
             $this->settings[$settingName] = new SettingValue(
                 $settingName,
@@ -110,7 +110,7 @@ class ArraySettingProvider implements SettingProviderInterface
      * @param string $settingName
      * @return SettingProviderInterface|null
      */
-    public function findSettingValue(string $settingName): ?SettingValueInterface
+    public function findValueInstance(string $settingName): ?SettingValueInterface
     {
         return $this->settings[$settingName] ?? null;
     }

@@ -14,28 +14,28 @@ use SettingsManager\Registry\SettingDefinitionRegistry;
 
 abstract class AbstractSettingsProviderTest extends TestCase
 {
-    public function testFindSettingValueReturnsValueWhenFound()
+    public function testFindValueInstanceReturnsValueWhenFound()
     {
         $obj = $this->getProviderInstance();
-        $this->assertSame('test', $obj->findSettingValue('string_setting')->getValue());
+        $this->assertSame('test', $obj->findValueInstance('string_setting')->getValue());
     }
 
-    public function testFindSettingValueReturnsNullWhenNotFound()
+    public function testFindValueInstanceReturnsNullWhenNotFound()
     {
         $obj = $this->getProviderInstance();
-        $this->assertNull($obj->findSettingValue('non_existent'));
+        $this->assertNull($obj->findValueInstance('non_existent'));
     }
 
-    public function testGetSettingValueReturnsValueWhenFound()
+    public function testGetValueInstanceReturnsValueWhenFound()
     {
         $obj = $this->getProviderInstance();
-        $this->assertSame('test', $obj->getSettingValue('string_setting')->getValue());
+        $this->assertSame('test', $obj->getValueInstance('string_setting')->getValue());
     }
 
-    public function testGetSettingValueThrowsExceptionWhenNotFound()
+    public function testGetValueInstanceThrowsExceptionWhenNotFound()
     {
         $this->expectException(SettingValueNotFoundException::class);
-        $this->getProviderInstance()->getSettingValue('non_existent');
+        $this->getProviderInstance()->getValueInstance('non_existent');
     }
 
     public function testGetName()

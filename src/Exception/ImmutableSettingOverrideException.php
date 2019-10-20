@@ -17,7 +17,6 @@
 namespace SettingsManager\Exception;
 
 use LogicException;
-use SettingsManager\Contract\SettingDefinitionInterface;
 use Throwable;
 
 /**
@@ -33,14 +32,14 @@ class ImmutableSettingOverrideException extends LogicException implements Settin
     /**
      * @param string $settingName
      * @param string $provider
-     * @param SettingDefinitionInterface $collidesWith
+     * @param string $originalProvider
      * @param Throwable|null $prior
      * @return ImmutableSettingOverrideException
      */
     public static function build(
         string $settingName,
         string $provider,
-        SettingDefinitionInterface $collidesWith,
+        string $originalProvider,
         Throwable $prior = null
     ) {
 
@@ -48,7 +47,7 @@ class ImmutableSettingOverrideException extends LogicException implements Settin
             'Setting name collision: %s (attempting to load from %s; already loaded from %s)',
             $settingName,
             $provider,
-            $collidesWith->getName()
+            $originalProvider
         );
 
         return new static($msg, $prior ? $prior->getCode() : 0, $prior);

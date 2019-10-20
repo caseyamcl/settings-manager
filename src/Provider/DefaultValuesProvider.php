@@ -77,7 +77,7 @@ class DefaultValuesProvider implements SettingProviderInterface
         return $out ?? [];
     }
 
-    public function findSettingValue(string $settingName): ?SettingValueInterface
+    public function findValueInstance(string $settingName): ?SettingValueInterface
     {
         return ($this->getSettingValues()[$settingName]) ?? null;
     }

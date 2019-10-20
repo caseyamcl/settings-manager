@@ -46,7 +46,7 @@ interface SettingProviderInterface
      * @param string $settingName
      * @return SettingProviderInterface|null
      */
-    public function findSettingValue(string $settingName): ?SettingValueInterface;
+    public function findValueInstance(string $settingName): ?SettingValueInterface;
 
     /**
      * Find a setting value or return NULL
@@ -63,7 +63,7 @@ interface SettingProviderInterface
      * @return SettingValueInterface
      * @throws SettingValueNotFoundException
      */
-    public function getSettingValue(string $settingName): SettingValueInterface;
+    public function getValueInstance(string $settingName): SettingValueInterface;
 
     /**
      * Get a setting value or throw exception
