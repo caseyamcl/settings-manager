@@ -4,6 +4,13 @@ All notable changes to *Settings Manager* will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## [UNRELEASED] - 2019-10-20
+### Added
+- `SettingProviderInterface::findValue()` shortcut method to get the value directly
+
+### Changed
+- **BC BREAK** - Renamed `SettingProviderInterface::findValue()` to `findSettingValue()` 
+
 ## [0.3] - 2018-09-18
 ### Added
 - `SettingInterface::isSensitive()` for denoting sensitive values

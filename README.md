@@ -7,7 +7,7 @@
 [![Quality Score][ico-code-quality]][link-code-quality]
 [![Total Downloads][ico-downloads]][link-downloads]
 
-This is a framework-agnostic library that provides a structure for managing and storing user-changeable settings.  
+This is a framework-agnostic library that provides a structure for managing and storing user-changeable settings.
 Settings can be stored in a configuration file, database, external API or anywhere else! 
 
 It provides the following common utilities:
