@@ -24,6 +24,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Removed
 - `SettingDefinitionRegistry::addItem()` (seemed unused)
 
+### Fixed
+- Behavior inconsistency in `CascadingSettingProvider` class.  Values will be initialized immediately upon being
+  loaded
+
 ## [0.3] - 2018-09-18
 ### Added
 - `SettingInterface::isSensitive()` for denoting sensitive values
