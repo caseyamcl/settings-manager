@@ -38,8 +38,18 @@ interface SettingsProviderInterface
     public function getSettingValues(): iterable;
 
     /**
+     * Find a setting instance or return NULL
+     *
      * @param string $settingName
      * @return SettingsProviderInterface|null
      */
-    public function findValue(string $settingName): ?SettingValueInterface;
+    public function findSettingValue(string $settingName): ?SettingValueInterface;
+
+    /**
+     * Find a setting value or return NULL
+     *
+     * @param string $settingName
+     * @return mixed|null
+     */
+    public function findValue(string $settingName);
 }

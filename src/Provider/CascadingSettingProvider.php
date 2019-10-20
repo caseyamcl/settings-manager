@@ -92,8 +92,18 @@ class CascadingSettingProvider implements SettingsProviderInterface
      * @param string $name
      * @return SettingsProviderInterface|null
      */
-    public function findValue(string $name): ?SettingValueInterface
+    public function findSettingValue(string $name): ?SettingValueInterface
     {
         return $this->getSettingValues()[$name] ?? null;
+    }
+
+
+    public function findValue(string $settingName)
+    {
+        if ($setting = $this->findSettingValue($settingName)) {
+            return $setting->getValue();
+        } else {
+            return null;
+        }
     }
 }

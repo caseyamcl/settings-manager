@@ -103,8 +103,17 @@ class ArraySettingProvider implements SettingsProviderInterface
      * @param string $settingName
      * @return SettingsProviderInterface|null
      */
-    public function findValue(string $settingName): ?SettingValueInterface
+    public function findSettingValue(string $settingName): ?SettingValueInterface
     {
         return $this->settings[$settingName] ?? null;
+    }
+
+    public function findValue(string $settingName)
+    {
+        if ($setting = $this->findSettingValue($settingName)) {
+            return $setting->getValue();
+        } else {
+            return null;
+        }
     }
 }
