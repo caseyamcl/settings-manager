@@ -18,7 +18,7 @@ namespace SettingsManager\Provider;
 
 use SettingsManager\Behavior\SettingProviderTrait;
 use SettingsManager\Contract\SettingRepositoryInterface;
-use SettingsManager\Contract\SettingsProviderInterface;
+use SettingsManager\Contract\SettingProviderInterface;
 use SettingsManager\Contract\SettingValueInterface;
 use SettingsManager\Model\SettingValue;
 
@@ -29,7 +29,7 @@ use SettingsManager\Model\SettingValue;
  *
  * @author Casey McLaughlin <caseyamcl@gmail.com>
  */
-class SettingRepositoryProvider implements SettingsProviderInterface
+class SettingRepositoryProvider implements SettingProviderInterface
 {
     use SettingProviderTrait;
 

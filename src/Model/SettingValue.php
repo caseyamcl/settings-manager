@@ -16,7 +16,7 @@
 
 namespace SettingsManager\Model;
 
-use SettingsManager\Contract\SettingsProviderInterface;
+use SettingsManager\Contract\SettingProviderInterface;
 use SettingsManager\Contract\SettingValueInterface;
 
 /**
@@ -49,13 +49,13 @@ class SettingValue implements SettingValueInterface
     /**
      * SettingValue constructor.
      * @param string $settingName
-     * @param SettingsProviderInterface $provider
+     * @param SettingProviderInterface $provider
      * @param bool $isMutable
      * @param mixed $value
      */
     public function __construct(
         string $settingName,
-        SettingsProviderInterface $provider,
+        SettingProviderInterface $provider,
         bool $isMutable,
         $value
     ) {

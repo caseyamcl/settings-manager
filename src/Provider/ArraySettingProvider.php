@@ -17,7 +17,7 @@
 namespace SettingsManager\Provider;
 
 use SettingsManager\Behavior\SettingProviderTrait;
-use SettingsManager\Contract\SettingsProviderInterface;
+use SettingsManager\Contract\SettingProviderInterface;
 use SettingsManager\Contract\SettingValueInterface;
 use SettingsManager\Model\SettingValue;
 use SettingsManager\Registry\SettingDefinitionRegistry;
@@ -29,7 +29,7 @@ use SettingsManager\Registry\SettingDefinitionRegistry;
  *
  * @author Casey McLaughlin <caseyamcl@gmail.com>
  */
-class ArraySettingProvider implements SettingsProviderInterface
+class ArraySettingProvider implements SettingProviderInterface
 {
     use SettingProviderTrait;
 
@@ -108,7 +108,7 @@ class ArraySettingProvider implements SettingsProviderInterface
 
     /**
      * @param string $settingName
-     * @return SettingsProviderInterface|null
+     * @return SettingProviderInterface|null
      */
     public function findSettingValue(string $settingName): ?SettingValueInterface
     {

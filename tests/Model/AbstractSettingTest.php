@@ -9,7 +9,7 @@ class AbstractSettingTest extends TestCase
 {
     public function testIsSensitive()
     {
-        $obj = new class extends AbstractSetting {
+        $obj = new class extends AbstractSettingDefinition {
             public const SENSITIVE = false;
 
             public function processValue($value)
@@ -23,7 +23,7 @@ class AbstractSettingTest extends TestCase
 
     public function testGetNotes()
     {
-        $obj = new class extends AbstractSetting {
+        $obj = new class extends AbstractSettingDefinition {
             public const NOTES = 'test';
 
             public function processValue($value)
@@ -37,7 +37,7 @@ class AbstractSettingTest extends TestCase
 
     public function testGetNameReturnsValueWhenConstantIsSet()
     {
-        $obj = new class extends AbstractSetting {
+        $obj = new class extends AbstractSettingDefinition {
             public const NAME = 'test';
 
             public function processValue($value)
@@ -54,7 +54,7 @@ class AbstractSettingTest extends TestCase
         $this->expectException(LogicException::class);
         $this->expectExceptionMessage('must implement constant');
 
-        $obj = new class extends AbstractSetting {
+        $obj = new class extends AbstractSettingDefinition {
             public function processValue($value)
             {
                 return $value;
@@ -66,7 +66,7 @@ class AbstractSettingTest extends TestCase
 
     public function testGetDefault()
     {
-        $obj = new class extends AbstractSetting {
+        $obj = new class extends AbstractSettingDefinition {
             const DEFAULT = 'test';
 
             public function processValue($value)
@@ -80,7 +80,7 @@ class AbstractSettingTest extends TestCase
 
     public function testGetDisplayNameReturnsValueWhenConstantIsSet()
     {
-        $obj = new class extends AbstractSetting {
+        $obj = new class extends AbstractSettingDefinition {
             public const DISPLAY_NAME = 'test';
 
             public function processValue($value)
@@ -97,7 +97,7 @@ class AbstractSettingTest extends TestCase
         $this->expectException(LogicException::class);
         $this->expectExceptionMessage('must implement constant');
 
-        $obj = new class extends AbstractSetting {
+        $obj = new class extends AbstractSettingDefinition {
             public function processValue($value)
             {
                 return $value;

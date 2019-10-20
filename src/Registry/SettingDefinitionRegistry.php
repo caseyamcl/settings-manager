@@ -19,7 +19,7 @@ namespace SettingsManager\Registry;
 use ArrayIterator;
 use IteratorAggregate;
 use RuntimeException;
-use SettingsManager\Contract\SettingInterface;
+use SettingsManager\Contract\SettingDefinitionInterface;
 use SettingsManager\Exception\ImmutableSettingOverrideException;
 
 /**
@@ -28,7 +28,7 @@ use SettingsManager\Exception\ImmutableSettingOverrideException;
 class SettingDefinitionRegistry implements IteratorAggregate
 {
     /**
-     * @var ArrayIterator|SettingInterface[]
+     * @var ArrayIterator|SettingDefinitionInterface[]
      */
     private $items;
 
@@ -51,9 +51,9 @@ class SettingDefinitionRegistry implements IteratorAggregate
 
     /**
      * @param string $name
-     * @return SettingInterface
+     * @return SettingDefinitionInterface
      */
-    public function get(string $name): SettingInterface
+    public function get(string $name): SettingDefinitionInterface
     {
         if ($this->has($name)) {
             return $this->items[$name];
@@ -63,9 +63,9 @@ class SettingDefinitionRegistry implements IteratorAggregate
     }
 
     /**
-     * @param SettingInterface $setting
+     * @param SettingDefinitionInterface $setting
      */
-    public function add(SettingInterface $setting)
+    public function add(SettingDefinitionInterface $setting)
     {
         if ($this->items->offsetExists($setting->getName()) && $setting !== $this->items[$setting->getName()]) {
             throw new ImmutableSettingOverrideException('Setting name collision: ' . $setting->getName());
@@ -75,7 +75,7 @@ class SettingDefinitionRegistry implements IteratorAggregate
     }
 
     /**
-     * @return ArrayIterator|SettingInterface[]
+     * @return ArrayIterator|SettingDefinitionInterface[]
      */
     public function getIterator(): ArrayIterator
     {

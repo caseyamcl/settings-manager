@@ -17,14 +17,14 @@
 namespace SettingsManager\Model;
 
 use LogicException;
-use SettingsManager\Contract\SettingInterface;
+use SettingsManager\Contract\SettingDefinitionInterface;
 
 /**
  * Abstract Setting - provides shortcut constants for common setting parameters
  *
  * @author Casey McLaughlin <caseyamcl@gmail.com>
  */
-abstract class AbstractSetting implements SettingInterface
+abstract class AbstractSettingDefinition implements SettingDefinitionInterface
 {
     public const NAME = null;
     public const DISPLAY_NAME = null;

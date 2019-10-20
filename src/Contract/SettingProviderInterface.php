@@ -21,7 +21,7 @@ use SettingsManager\Exception\SettingValueNotFoundException;
 /**
  * Settings provider interface
  */
-interface SettingsProviderInterface
+interface SettingProviderInterface
 {
     /**
      * @return string
@@ -44,7 +44,7 @@ interface SettingsProviderInterface
      * Find a setting instance or return NULL
      *
      * @param string $settingName
-     * @return SettingsProviderInterface|null
+     * @return SettingProviderInterface|null
      */
     public function findSettingValue(string $settingName): ?SettingValueInterface;
 

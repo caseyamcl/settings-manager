@@ -21,7 +21,7 @@ namespace SettingsManager\Contract;
  *
  * @author Casey McLaughlin <caseyamcl@gmail.com>
  */
-interface SettingInterface
+interface SettingDefinitionInterface
 {
     /**
      * The canonical name for this setting (machine-friendly)

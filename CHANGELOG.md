@@ -11,6 +11,11 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Changed
 - **BC BREAK** - Renamed `SettingProviderInterface::findValue()` to `findSettingValue()` 
 - **BC BREAK** - Moved `AbstractSetting` to the `Model` namespace and removed the `Helper` namespace
+- **BC BREAK** - Renamed `SettingsProviderInterface` to `SettingProviderInterface` for consistency
+- **BC BREAK** - Renamed `DefaultProvider` to `DefaultValuesProvider` for clarity
+- **BC BREAK** - Renamed classes: 
+    - `SettingInterface` to `SettingDefinitionInterface`
+    - `AbstractSetting` to `AbstractSettingDefinition`
 - Change in default behavior: Assume all settings are sensitive by default
 ### Removed
 - `SettingDefinitionRegistry::addItem()` (seemed unused)

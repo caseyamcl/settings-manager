@@ -17,7 +17,7 @@
 namespace SettingsManager\Exception;
 
 use LogicException;
-use SettingsManager\Contract\SettingInterface;
+use SettingsManager\Contract\SettingDefinitionInterface;
 use Throwable;
 
 /**
@@ -33,14 +33,14 @@ class ImmutableSettingOverrideException extends LogicException
     /**
      * @param string $settingName
      * @param string $provider
-     * @param SettingInterface $collidesWith
+     * @param SettingDefinitionInterface $collidesWith
      * @param Throwable|null $prior
      * @return ImmutableSettingOverrideException
      */
     public static function build(
         string $settingName,
         string $provider,
-        SettingInterface $collidesWith,
+        SettingDefinitionInterface $collidesWith,
         Throwable $prior = null
     ) {
 

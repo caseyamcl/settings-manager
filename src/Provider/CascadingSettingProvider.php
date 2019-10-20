@@ -17,7 +17,7 @@
 namespace SettingsManager\Provider;
 
 use SettingsManager\Behavior\SettingProviderTrait;
-use SettingsManager\Contract\SettingsProviderInterface;
+use SettingsManager\Contract\SettingProviderInterface;
 use SettingsManager\Contract\SettingValueInterface;
 use SettingsManager\Exception\ImmutableSettingOverrideException;
 
@@ -28,12 +28,12 @@ use SettingsManager\Exception\ImmutableSettingOverrideException;
  *
  * @author Casey McLaughlin <caseyamcl@gmail.com>
  */
-class CascadingSettingProvider implements SettingsProviderInterface
+class CascadingSettingProvider implements SettingProviderInterface
 {
     use SettingProviderTrait;
 
     /**
-     * @var array|SettingsProviderInterface[]
+     * @var array|SettingProviderInterface[]
      */
     private $providers;
 
@@ -48,7 +48,7 @@ class CascadingSettingProvider implements SettingsProviderInterface
         }
     }
 
-    private function add(SettingsProviderInterface $provider)
+    private function add(SettingProviderInterface $provider)
     {
         $this->providers[] = $provider;
     }
@@ -98,7 +98,7 @@ class CascadingSettingProvider implements SettingsProviderInterface
 
     /**
      * @param string $name
-     * @return SettingsProviderInterface|null
+     * @return SettingProviderInterface|null
      */
     public function findSettingValue(string $name): ?SettingValueInterface
     {
