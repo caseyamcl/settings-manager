@@ -33,5 +33,4 @@ interface SettingRepositoryInterface
      * @return iterable|mixed[]
      */
     public function listValues(): iterable;
-
 }

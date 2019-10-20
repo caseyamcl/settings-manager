@@ -15,16 +15,19 @@
 
 namespace SettingsManager\Registry;
 
+use ArrayIterator;
+use IteratorAggregate;
+use RuntimeException;
 use SettingsManager\Contract\SettingInterface;
 use SettingsManager\Exception\ImmutableSettingOverrideException;
 
 /**
  * Class SettingDefinitionRegistry
  */
-class SettingDefinitionRegistry implements \IteratorAggregate
+class SettingDefinitionRegistry implements IteratorAggregate
 {
     /**
-     * @var \ArrayIterator|SettingInterface[]
+     * @var ArrayIterator|SettingInterface[]
      */
     private $items;
 
@@ -33,7 +36,7 @@ class SettingDefinitionRegistry implements \IteratorAggregate
      */
     public function __construct()
     {
-        $this->items = new \ArrayIterator([]);
+        $this->items = new ArrayIterator([]);
     }
 
     /**
@@ -54,7 +57,7 @@ class SettingDefinitionRegistry implements \IteratorAggregate
         if ($this->has($name)) {
             return $this->items[$name];
         } else {
-            throw new \RuntimeException("Setting not found: " . $name);
+            throw new RuntimeException("Setting not found: " . $name);
         }
     }
 
@@ -71,9 +74,9 @@ class SettingDefinitionRegistry implements \IteratorAggregate
     }
 
     /**
-     * @return \ArrayIterator|SettingInterface[]
+     * @return ArrayIterator|SettingInterface[]
      */
-    public function getIterator(): \ArrayIterator
+    public function getIterator(): ArrayIterator
     {
         return $this->items;
     }

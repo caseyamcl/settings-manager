@@ -15,6 +15,7 @@
 
 namespace SettingsManager\Helper;
 
+use LogicException;
 use SettingsManager\Contract\SettingInterface;
 
 /**
@@ -69,6 +70,8 @@ abstract class AbstractSetting implements SettingInterface
     }
 
     /**
+     * Require that a constant exists
+     *
      * @param string $name
      * @return mixed
      */
@@ -78,7 +81,7 @@ abstract class AbstractSetting implements SettingInterface
             return $constant;
         } else {
             $caller = debug_backtrace()[1]['function'] ?? '(?)';
-            throw new \LogicException(sprintf(
+            throw new LogicException(sprintf(
                 "%s must implement constant '%s' or method '%s'".
                 $name,
                 $caller
