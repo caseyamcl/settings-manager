@@ -22,6 +22,17 @@ class CascadingSettingProviderTest extends AbstractSettingsProviderTest
         ], $this->buildDefinitions(), 'test2', 'Test 2'));
     }
 
+    public function testWithProviderReturnsNewInstanceOfObject()
+    {
+        $original = $this->getProviderInstance();
+        $new = $original->withProvider(new ArraySettingProvider([
+            'string_setting' => 'test3'
+        ], $this->buildDefinitions(), 'test3', 'Test 3'));
+
+        $this->assertNotSame($original, $new);
+        $this->assertSame('test3', $new->getValue('string_setting'));
+    }
+
     /**
      * @return array  Keys are setting names, values are setting values
      */
