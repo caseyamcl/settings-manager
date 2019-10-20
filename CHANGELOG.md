@@ -16,13 +16,14 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - **BC BREAK** - Renamed classes: 
     - `SettingInterface` to `SettingDefinitionInterface`
     - `AbstractSetting` to `AbstractSettingDefinition`
+- **BC BREAK** - Renamed `SettingValue::getSettingName()` to `SettingValue::getName()`
 - Change in default behavior: Assume all settings are sensitive by default
 - Adding multiple settings with the same name throws a `SettingNameCollisionException` instead of a half-baked
   `ImmutableSettingOverrideException`
 - Added common interface for all exceptions: `SettingException`
 
 ### Removed
-- `SettingDefinitionRegistry::addItem()` (seemed unused)
+- `SettingDefinitionRegistry::addItem()` (seemed redundant with the `add()` method)
 
 ### Fixed
 - Behavior inconsistency in `CascadingSettingProvider` class.  Values will be initialized immediately upon being

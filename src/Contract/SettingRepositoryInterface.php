@@ -24,10 +24,10 @@ namespace SettingsManager\Contract;
 interface SettingRepositoryInterface
 {
     /**
-     * Find a setting value by its name
+     * Find a setting value by its name or NULL if it is not found
      *
      * @param string $settingName
-     * @return mixed
+     * @return mixed|null
      */
     public function findValue(string $settingName);
 

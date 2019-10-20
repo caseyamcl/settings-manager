@@ -24,7 +24,7 @@ interface SettingValueInterface
     /**
      * @return string
      */
-    public function getSettingName(): string;
+    public function getName(): string;
 
     /**
      * @return mixed

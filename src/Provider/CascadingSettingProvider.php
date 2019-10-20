@@ -70,19 +70,19 @@ class CascadingSettingProvider implements SettingProviderInterface
 
         // Initialize setting values
         foreach ($provider->getSettingValues() as $value) {
-            $valueCollision = array_key_exists($value->getSettingName(), $this->valuesCache)
-                && (! $this->valuesCache[$value->getSettingName()]->isMutable());
+            $valueCollision = array_key_exists($value->getName(), $this->valuesCache)
+                && (! $this->valuesCache[$value->getName()]->isMutable());
 
             // If the setting is already in the out array and is immutable, throw exception.
             if ($valueCollision) {
                 throw ImmutableSettingOverrideException::build(
-                    $value->getSettingName(),
+                    $value->getName(),
                     $provider->getName(),
-                    $this->valuesCache[$value->getSettingName()]->getProviderName()
+                    $this->valuesCache[$value->getName()]->getProviderName()
                 );
             }
 
-            $this->valuesCache[$value->getSettingName()] = $value;
+            $this->valuesCache[$value->getName()] = $value;
         }
     }
 
