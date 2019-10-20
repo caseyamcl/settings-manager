@@ -3,8 +3,8 @@
  * Settings Manager
  *
  * @license http://opensource.org/licenses/MIT
- * @link https://github.com/caseyamcl/settings_manager
- * @package caseyamcl/settings_manager
+ * @link https://github.com/caseyamcl/settings-manager
+ * @package caseyamcl/settings-manager
  * @author Casey McLaughlin <caseyamcl@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
@@ -15,17 +15,23 @@
 
 namespace SettingsManager\Provider;
 
+use SettingsManager\Behavior\SettingProviderTrait;
 use SettingsManager\Contract\SettingsProviderInterface;
 use SettingsManager\Contract\SettingValueInterface;
 use SettingsManager\Model\SettingValue;
 use SettingsManager\Registry\SettingDefinitionRegistry;
 
 /**
- * Class ConfigurationProvider
- * @package SettingsManager\Provider
+ * Array Settings Provider
+ *
+ * Reads settings from an array
+ *
+ * @author Casey McLaughlin <caseyamcl@gmail.com>
  */
 class ArraySettingProvider implements SettingsProviderInterface
 {
+    use SettingProviderTrait;
+
     /**
      * @var array
      */
@@ -106,14 +112,5 @@ class ArraySettingProvider implements SettingsProviderInterface
     public function findSettingValue(string $settingName): ?SettingValueInterface
     {
         return $this->settings[$settingName] ?? null;
-    }
-
-    public function findValue(string $settingName)
-    {
-        if ($setting = $this->findSettingValue($settingName)) {
-            return $setting->getValue();
-        } else {
-            return null;
-        }
     }
 }

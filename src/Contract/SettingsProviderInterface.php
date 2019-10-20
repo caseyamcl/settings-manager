@@ -3,8 +3,8 @@
  * Settings Manager
  *
  * @license http://opensource.org/licenses/MIT
- * @link https://github.com/caseyamcl/settings_manager
- * @package caseyamcl/settings_manager
+ * @link https://github.com/caseyamcl/settings-manager
+ * @package caseyamcl/settings-manager
  * @author Casey McLaughlin <caseyamcl@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
@@ -15,8 +15,10 @@
 
 namespace SettingsManager\Contract;
 
+use SettingsManager\Exception\SettingValueNotFoundException;
+
 /**
- * Class SettingsProviderInterface
+ * Settings provider interface
  */
 interface SettingsProviderInterface
 {
@@ -52,4 +54,22 @@ interface SettingsProviderInterface
      * @return mixed|null
      */
     public function findValue(string $settingName);
+
+    /**
+     * Get a setting instance or throw an exception
+     *
+     * @param string $settingName
+     * @return SettingValueInterface
+     * @throws SettingValueNotFoundException
+     */
+    public function getSettingValue(string $settingName): SettingValueInterface;
+
+    /**
+     * Get a setting value or throw exception
+     *
+     * @param string $settingName
+     * @return mixed
+     * @throws SettingValueNotFoundException
+     */
+    public function getValue(string $settingName);
 }

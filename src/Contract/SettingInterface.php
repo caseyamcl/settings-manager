@@ -3,8 +3,8 @@
  * Settings Manager
  *
  * @license http://opensource.org/licenses/MIT
- * @link https://github.com/caseyamcl/settings_manager
- * @package caseyamcl/settings_manager
+ * @link https://github.com/caseyamcl/settings-manager
+ * @package caseyamcl/settings-manager
  * @author Casey McLaughlin <caseyamcl@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
@@ -16,7 +16,9 @@
 namespace SettingsManager\Contract;
 
 /**
- * Class SettingInterface
+ * Setting Interface defines the attributes for a setting
+ *
+ * @author Casey McLaughlin <caseyamcl@gmail.com>
  */
 interface SettingInterface
 {

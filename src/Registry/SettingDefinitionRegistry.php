@@ -3,8 +3,8 @@
  * Settings Manager
  *
  * @license http://opensource.org/licenses/MIT
- * @link https://github.com/caseyamcl/settings_manager
- * @package caseyamcl/settings_manager
+ * @link https://github.com/caseyamcl/settings-manager
+ * @package caseyamcl/settings-manager
  * @author Casey McLaughlin <caseyamcl@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
@@ -79,13 +79,5 @@ class SettingDefinitionRegistry implements IteratorAggregate
     public function getIterator(): ArrayIterator
     {
         return $this->items;
-    }
-
-    /**
-     * @param SettingInterface $item
-     */
-    public function addItem($item): void
-    {
-        $this->add($item);
     }
 }

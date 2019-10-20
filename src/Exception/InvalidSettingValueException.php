@@ -3,8 +3,8 @@
  * Settings Manager
  *
  * @license http://opensource.org/licenses/MIT
- * @link https://github.com/caseyamcl/settings_manager
- * @package caseyamcl/settings_manager
+ * @link https://github.com/caseyamcl/settings-manager
+ * @package caseyamcl/settings-manager
  * @author Casey McLaughlin <caseyamcl@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
@@ -15,12 +15,17 @@
 
 namespace SettingsManager\Exception;
 
+use RuntimeException;
 use Throwable;
 
 /**
- * Class InvalidSettingValueException
+ * Invalid Setting value exception
+ *
+ * Thrown when the user attempts to set an invalid values (e.g. a value that doesn't pass validation checks)
+ *
+ * @author Casey McLaughlin <caseyamcl@gmail.com>
  */
-class InvalidSettingValueException extends \RuntimeException
+class InvalidSettingValueException extends RuntimeException
 {
     /**
      * @var array|string[]

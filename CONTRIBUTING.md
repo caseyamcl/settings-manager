@@ -2,7 +2,7 @@
 
 Contributions are **welcome** and will be fully **credited**.
 
-We accept contributions via Pull Requests on [Github](https://github.com/caseyamcl/settings_manager).
+We accept contributions via Pull Requests on [Github](https://github.com/caseyamcl/settings-manager).
 
 
 ## Pull Requests

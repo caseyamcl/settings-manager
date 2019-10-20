@@ -3,8 +3,8 @@
  * Settings Manager
  *
  * @license http://opensource.org/licenses/MIT
- * @link https://github.com/caseyamcl/settings_manager
- * @package caseyamcl/settings_manager
+ * @link https://github.com/caseyamcl/settings-manager
+ * @package caseyamcl/settings-manager
  * @author Casey McLaughlin <caseyamcl@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
@@ -16,7 +16,8 @@
 namespace SettingsManager\Contract;
 
 /**
- * Class SettingRepositoryInterface
+ * Setting repository interface defines the interface for storing raw setting values in a persistence layer
+ *
  * @package SettingsManager\Contract
  */
 interface SettingRepositoryInterface
@@ -30,6 +31,8 @@ interface SettingRepositoryInterface
     public function findValue(string $settingName);
 
     /**
+     * List values
+     *
      * @return iterable|mixed[]
      */
     public function listValues(): iterable;

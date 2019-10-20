@@ -3,8 +3,8 @@
  * Settings Manager
  *
  * @license http://opensource.org/licenses/MIT
- * @link https://github.com/caseyamcl/settings_manager
- * @package caseyamcl/settings_manager
+ * @link https://github.com/caseyamcl/settings-manager
+ * @package caseyamcl/settings-manager
  * @author Casey McLaughlin <caseyamcl@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
@@ -15,16 +15,23 @@
 
 namespace SettingsManager\Provider;
 
+use SettingsManager\Behavior\SettingProviderTrait;
 use SettingsManager\Contract\SettingRepositoryInterface;
 use SettingsManager\Contract\SettingsProviderInterface;
 use SettingsManager\Contract\SettingValueInterface;
 use SettingsManager\Model\SettingValue;
 
 /**
- * Class DoctrineOrmProvider
+ * Settings Repository provider
+ *
+ * Reads settings from an instance that implements the `Contract\SettingRepositoryInterface`
+ *
+ * @author Casey McLaughlin <caseyamcl@gmail.com>
  */
 class SettingRepositoryProvider implements SettingsProviderInterface
 {
+    use SettingProviderTrait;
+
     /**
      * @var SettingRepositoryInterface
      */
@@ -92,14 +99,5 @@ class SettingRepositoryProvider implements SettingsProviderInterface
         return ($value = $this->repository->findValue($settingName))
             ? new SettingValue($settingName, $this, true, $value)
             : null;
-    }
-
-    public function findValue(string $settingName)
-    {
-        if ($setting = $this->findSettingValue($settingName)) {
-            return $setting->getValue();
-        } else {
-            return null;
-        }
     }
 }

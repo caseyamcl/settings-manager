@@ -3,8 +3,8 @@
  * Settings Manager
  *
  * @license http://opensource.org/licenses/MIT
- * @link https://github.com/caseyamcl/settings_manager
- * @package caseyamcl/settings_manager
+ * @link https://github.com/caseyamcl/settings-manager
+ * @package caseyamcl/settings-manager
  * @author Casey McLaughlin <caseyamcl@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
@@ -13,13 +13,15 @@
  *  ------------------------------------------------------------------
  */
 
-namespace SettingsManager\Helper;
+namespace SettingsManager\Model;
 
 use LogicException;
 use SettingsManager\Contract\SettingInterface;
 
 /**
- * Class AbstractSetting
+ * Abstract Setting - provides shortcut constants for common setting parameters
+ *
+ * @author Casey McLaughlin <caseyamcl@gmail.com>
  */
 abstract class AbstractSetting implements SettingInterface
 {

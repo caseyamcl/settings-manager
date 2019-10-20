@@ -3,8 +3,8 @@
  * Settings Manager
  *
  * @license http://opensource.org/licenses/MIT
- * @link https://github.com/caseyamcl/settings_manager
- * @package caseyamcl/settings_manager
+ * @link https://github.com/caseyamcl/settings-manager
+ * @package caseyamcl/settings-manager
  * @author Casey McLaughlin <caseyamcl@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
@@ -15,25 +15,32 @@
 
 namespace SettingsManager\Exception;
 
+use LogicException;
 use SettingsManager\Contract\SettingInterface;
+use Throwable;
 
 /**
- * Class SettingNameCollisionException
+ * Immutable setting override exception
+ *
+ * Thrown when an implementing library attempts to set an immutable setting
+ * that has already been set.
+ *
+ * @author Casey McLaughlin <caseyamcl@gmail.com>
  */
-class ImmutableSettingOverrideException extends \LogicException
+class ImmutableSettingOverrideException extends LogicException
 {
     /**
      * @param string $settingName
      * @param string $provider
      * @param SettingInterface $collidesWith
-     * @param \Throwable|null $prior
+     * @param Throwable|null $prior
      * @return ImmutableSettingOverrideException
      */
     public static function build(
         string $settingName,
         string $provider,
         SettingInterface $collidesWith,
-        \Throwable $prior = null
+        Throwable $prior = null
     ) {
 
         $msg = sprintf(

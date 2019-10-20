@@ -48,7 +48,7 @@ setting values are loaded in a cascading way.
 Via Composer
 
 ``` bash
-$ composer require caseyamcl/settings_manager
+$ composer require caseyamcl/settings-manager
 ```
 
 
@@ -101,17 +101,17 @@ If you discover any security related issues, please email caseyamcl@gmail.com in
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/caseyamcl/settings_manager.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/caseyamcl/settings-manager.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/caseyamcl/settings_manager/master.svg?style=flat-square
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/caseyamcl/settings_manager.svg?style=flat-square
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/caseyamcl/settings_manager.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/caseyamcl/settings_manager.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/caseyamcl/settings-manager/master.svg?style=flat-square
+[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/caseyamcl/settings-manager.svg?style=flat-square
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/caseyamcl/settings-manager.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/caseyamcl/settings-manager.svg?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/caseyamcl/settings_manager
-[link-travis]: https://travis-ci.org/caseyamcl/settings_manager
-[link-scrutinizer]: https://scrutinizer-ci.com/g/caseyamcl/settings_manager/code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/caseyamcl/settings_manager
-[link-downloads]: https://packagist.org/packages/caseyamcl/settings_manager
+[link-packagist]: https://packagist.org/packages/caseyamcl/settings-manager
+[link-travis]: https://travis-ci.org/caseyamcl/settings-manager
+[link-scrutinizer]: https://scrutinizer-ci.com/g/caseyamcl/settings-manager/code-structure
+[link-code-quality]: https://scrutinizer-ci.com/g/caseyamcl/settings-manager
+[link-downloads]: https://packagist.org/packages/caseyamcl/settings-manager
 [link-author]: https://github.com/caseyamcl
 [link-contributors]: ../../contributors
