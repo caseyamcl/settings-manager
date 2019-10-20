@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Settings Manager
  *
@@ -25,11 +26,11 @@ use SettingsManager\Contract\SettingInterface;
  */
 abstract class AbstractSetting implements SettingInterface
 {
-    const NAME = null;
-    const DISPLAY_NAME = null;
-    const NOTES = '';
-    const DEFAULT = null;
-    const SENSITIVE = false;
+    public const NAME = null;
+    public const DISPLAY_NAME = null;
+    public const NOTES = '';
+    public const DEFAULT = null;
+    public const SENSITIVE = false;
 
     /**
      * @return string
@@ -84,11 +85,10 @@ abstract class AbstractSetting implements SettingInterface
         } else {
             $caller = debug_backtrace()[1]['function'] ?? '(?)';
             throw new LogicException(sprintf(
-                "%s must implement constant '%s' or method '%s'".
+                "%s must implement constant '%s' or method '%s'" .
                 $name,
                 $caller
             ));
         }
     }
-
 }
