@@ -67,7 +67,7 @@ class AbstractSettingTest extends TestCase
     public function testGetDefault()
     {
         $obj = new class extends AbstractSettingDefinition {
-            const DEFAULT = 'test';
+            public const DEFAULT = 'test';
 
             public function processValue($value)
             {
