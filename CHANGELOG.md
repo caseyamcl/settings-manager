@@ -7,9 +7,11 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ## [UNRELEASED] - 2019-10-20
 ### Added
 - `SettingProviderInterface::findValue()` shortcut method to get the value directly
+- Full suite of tests
 ### Changed
 - **BC BREAK** - Renamed `SettingProviderInterface::findValue()` to `findSettingValue()` 
 - **BC BREAK** - Moved `AbstractSetting` to the `Model` namespace and removed the `Helper` namespace
+- Change in default behavior: Assume all settings are sensitive by default
 ### Removed
 - `SettingDefinitionRegistry::addItem()` (seemed unused)
 

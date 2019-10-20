@@ -30,7 +30,7 @@ abstract class AbstractSetting implements SettingInterface
     public const DISPLAY_NAME = null;
     public const NOTES = '';
     public const DEFAULT = null;
-    public const SENSITIVE = false;
+    public const SENSITIVE = true;
 
     /**
      * @return string
@@ -69,7 +69,7 @@ abstract class AbstractSetting implements SettingInterface
      */
     public function isSensitive(): bool
     {
-        return static::SENSITIVE;
+        return (bool) static::SENSITIVE;
     }
 
     /**
@@ -85,7 +85,8 @@ abstract class AbstractSetting implements SettingInterface
         } else {
             $caller = debug_backtrace()[1]['function'] ?? '(?)';
             throw new LogicException(sprintf(
-                "%s must implement constant '%s' or method '%s'" .
+                "%s must implement constant '%s' or method '%s'",
+                get_called_class(),
                 $name,
                 $caller
             ));
