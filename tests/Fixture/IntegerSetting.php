@@ -22,10 +22,14 @@ class IntegerSetting extends AbstractSettingDefinition
     public function processValue($value)
     {
         if (! is_int($value)) {
-            throw new InvalidSettingValueException('value must be an integer');
+            $errors[] = 'value must be an integer';
         }
         if ($value >= 20) {
-            throw new InvalidSettingValueException('value must be less than 20');
+            $errors[] = 'value must be less than 20';
+        }
+
+        if (isset($errors)) {
+            throw new InvalidSettingValueException($errors);
         }
 
         return $value;

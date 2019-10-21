@@ -5,6 +5,7 @@ namespace SettingsManager\Provider;
 use SettingsManager\AbstractSettingsProviderTest;
 use SettingsManager\Contract\SettingProviderInterface;
 use SettingsManager\Fixture\TestSettingRepository;
+use SettingsManager\Model\SettingValue;
 
 /**
  * Class SettingRepositoryProviderTest
@@ -13,14 +14,16 @@ use SettingsManager\Fixture\TestSettingRepository;
  */
 class SettingRepositoryProviderTest extends AbstractSettingsProviderTest
 {
-    // LEFT OFF HERE - Refer to the actual implementation in the Saluki repository to see about what to do here...
-
     /**
      * @return array  Keys are setting names, values are setting values
      */
     protected function getExpectedValues(): array
     {
-        // TODO: Implement getExpectedValues() method.
+        return [
+            'string_setting' => 'test',
+            'integer_setting' => 20,
+            'decimal_setting' => 15.2
+        ];
     }
 
     /**
@@ -29,5 +32,10 @@ class SettingRepositoryProviderTest extends AbstractSettingsProviderTest
     protected function getProviderInstance(): SettingProviderInterface
     {
         $repo = new TestSettingRepository();
+        $provider = new SettingRepositoryProvider($repo);
+        $repo->addValue(new SettingValue('string_setting', $provider, true, 'test'));
+        $repo->addValue(new SettingValue('integer_setting', $provider, true, 20));
+        $repo->addValue(new SettingValue('decimal_setting', $provider, true, 15.2));
+        return $provider;
     }
 }

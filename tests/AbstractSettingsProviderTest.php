@@ -17,7 +17,7 @@ abstract class AbstractSettingsProviderTest extends TestCase
     public function testFindValueInstanceReturnsValueWhenFound()
     {
         $obj = $this->getProviderInstance();
-        $this->assertSame('test', $obj->findValueInstance('string_setting')->getValue());
+        $this->assertStringStartsWith('test', $obj->findValueInstance('string_setting')->getValue());
     }
 
     public function testFindValueInstanceReturnsNullWhenNotFound()
@@ -26,10 +26,22 @@ abstract class AbstractSettingsProviderTest extends TestCase
         $this->assertNull($obj->findValueInstance('non_existent'));
     }
 
+    public function testFindValueReturnsValueWhenFound()
+    {
+        $obj = $this->getProviderInstance();
+        $this->assertStringStartsWith('test', $obj->findValue('string_setting'));
+    }
+
+    public function testFindValueReturnsNullWhenNotFound()
+    {
+        $obj = $this->getProviderInstance();
+        $this->assertNull($obj->findValue('non_existent'));
+    }
+
     public function testGetValueInstanceReturnsValueWhenFound()
     {
         $obj = $this->getProviderInstance();
-        $this->assertSame('test', $obj->getValueInstance('string_setting')->getValue());
+        $this->assertStringStartsWith('test', $obj->getValueInstance('string_setting')->getValue());
     }
 
     public function testGetValueInstanceThrowsExceptionWhenNotFound()

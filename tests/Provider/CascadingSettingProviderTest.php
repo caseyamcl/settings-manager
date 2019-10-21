@@ -18,7 +18,7 @@ class CascadingSettingProviderTest extends AbstractSettingsProviderTest
         $msg = 'Setting name collision: integer_setting (attempting to load from test2; already loaded from test)';
 
         $this->expectException(ImmutableSettingOverrideException::class);
-        $this->expectExceptionMessageMatches($msg);
+        $this->expectExceptionMessage($msg);
         $this->getProviderInstance()->withProvider(new ArraySettingProvider([
             'integer_setting' => 3
         ], $this->buildDefinitions(), 'test2', 'Test 2'));

@@ -17,6 +17,7 @@
 namespace SettingsManager\Registry;
 
 use ArrayIterator;
+use Countable;
 use IteratorAggregate;
 use RuntimeException;
 use SettingsManager\Contract\SettingDefinitionInterface;
@@ -25,7 +26,7 @@ use SettingsManager\Exception\SettingNameCollisionException;
 /**
  * Class SettingDefinitionRegistry
  */
-class SettingDefinitionRegistry implements IteratorAggregate
+class SettingDefinitionRegistry implements IteratorAggregate, Countable
 {
     /**
      * @var ArrayIterator|SettingDefinitionInterface[]
@@ -89,5 +90,13 @@ class SettingDefinitionRegistry implements IteratorAggregate
     public function getIterator(): ArrayIterator
     {
         return $this->items;
+    }
+
+    /**
+     * @return int
+     */
+    public function count(): int
+    {
+        return $this->items->count();
     }
 }
