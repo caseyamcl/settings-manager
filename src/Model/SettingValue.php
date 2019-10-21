@@ -14,6 +14,8 @@
  *  ------------------------------------------------------------------
  */
 
+declare(strict_types=1);
+
 namespace SettingsManager\Model;
 
 use SettingsManager\Contract\SettingProviderInterface;

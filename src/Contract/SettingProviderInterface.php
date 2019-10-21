@@ -14,6 +14,8 @@
  *  ------------------------------------------------------------------
  */
 
+declare(strict_types=1);
+
 namespace SettingsManager\Contract;
 
 use SettingsManager\Exception\SettingValueNotFoundException;
