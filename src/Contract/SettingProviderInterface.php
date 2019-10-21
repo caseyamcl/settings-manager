@@ -54,7 +54,7 @@ interface SettingProviderInterface
      * Find a setting value or return NULL
      *
      * @param string $settingName
-     * @return mixed|null
+     * @return mixed
      */
     public function findValue(string $settingName);
 
