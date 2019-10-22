@@ -40,14 +40,22 @@ A **Setting Definition** is simply a PHP class that implements the
 * An optional default value
 * Optional validation/transform logic for processing incoming values
 
-A **Setting Provider** is a service class that loads setting values.  Multiple providers can be chained together so that
+Setting definitions are added to the `SettingDefinitionRegistry`.
+
+A **Setting Provider** is a service class that loads setting values from a source.  Sources can be 
+
+Multiple providers can be chained together so that
 setting values are loaded in a cascading way.  Several providers have been bundled (see below), but you can feel free to add
 your own by extending the `SettingProvider` interface.  Providers have similar attributes to definitions:
 
 * A name (e.g. a machine name/slug)
 * A display name
 
-A **Setting Value** is a 
+A **Setting Value** is an object that stores the value of the setting, along with a few additional values:
+
+* The setting name
+* The provider name that this setting came was defined by
+* Whether or not the setting is mutable or not (see further explanation below)
 
 ## Install
 

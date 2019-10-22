@@ -4,10 +4,11 @@ All notable changes to *Settings Manager* will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
-## [UNRELEASED] - 2019-10-20
+## [0.9] - 2019-10-22
 ### Added
 - `SettingProviderInterface::findValue()` shortcut method to get the value directly
 - Full suite of tests
+- Default implementation of `processValue()` method in `AbstractSettingDefinition` class (to make validation truly optional)
 - `final` keywords to a number of methods in multiple classes
 ### Changed
 - **BC BREAK** - Renamed `SettingProviderInterface::findValue()` to `findSettingValue()` 

@@ -75,6 +75,16 @@ abstract class AbstractSettingDefinition implements SettingDefinition
     }
 
     /**
+     * @param mixed $value
+     * @return mixed
+     */
+    public function processValue($value)
+    {
+        return $value;
+    }
+
+
+    /**
      * Require that a constant exists
      *
      * @param string $name
