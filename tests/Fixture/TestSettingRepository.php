@@ -18,17 +18,17 @@ declare(strict_types=1);
 
 namespace SettingsManager\Fixture;
 
-use SettingsManager\Contract\SettingRepositoryInterface;
-use SettingsManager\Contract\SettingValueInterface;
+use SettingsManager\Contract\SettingRepository;
+use SettingsManager\Model\SettingValue;
 
-class TestSettingRepository implements SettingRepositoryInterface
+class TestSettingRepository implements SettingRepository
 {
     private $values = [];
 
     /**
-     * @param SettingValueInterface $settingValue
+     * @param SettingValue $settingValue
      */
-    public function addValue(SettingValueInterface $settingValue)
+    public function addValue(SettingValue $settingValue)
     {
         $this->values[$settingValue->getName()] = $settingValue->getValue();
     }

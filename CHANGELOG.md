@@ -8,6 +8,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Added
 - `SettingProviderInterface::findValue()` shortcut method to get the value directly
 - Full suite of tests
+- `final` keywords to a number of methods in multiple classes
 ### Changed
 - **BC BREAK** - Renamed `SettingProviderInterface::findValue()` to `findSettingValue()` 
 - **BC BREAK** - Moved `AbstractSetting` to the `Model` namespace and removed the `Helper` namespace
@@ -17,6 +18,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
     - `SettingInterface` to `SettingDefinitionInterface`
     - `AbstractSetting` to `AbstractSettingDefinition`
 - **BC BREAK** - Renamed `SettingValue::getSettingName()` to `SettingValue::getName()`
+- **BC BREAK** - Removed `...Interface` suffix from all interfaces
 - Change in default behavior: Assume all settings are sensitive by default
 - Adding multiple settings with the same name throws a `SettingNameCollisionException` instead of a half-baked
   `ImmutableSettingOverrideException`
@@ -24,6 +26,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Removed
 - `SettingDefinitionRegistry::addItem()` (seemed redundant with the `add()` method)
+- `SettingValueInterface` (seemed redundant with concrete class implementation)
 
 ### Fixed
 - Behavior inconsistency in `CascadingSettingProvider` class.  Values will be initialized immediately upon being

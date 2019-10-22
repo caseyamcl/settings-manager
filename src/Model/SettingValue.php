@@ -18,15 +18,14 @@ declare(strict_types=1);
 
 namespace SettingsManager\Model;
 
-use SettingsManager\Contract\SettingProviderInterface;
-use SettingsManager\Contract\SettingValueInterface;
+use SettingsManager\Contract\SettingProvider;
 
 /**
  * Setting value - Stores a value for a given setting
  *
  * @author Casey McLaughlin <caseyamcl@gmail.com>
  */
-class SettingValue implements SettingValueInterface
+class SettingValue
 {
     /**
      * @var string
@@ -51,13 +50,13 @@ class SettingValue implements SettingValueInterface
     /**
      * SettingValue constructor.
      * @param string $settingName
-     * @param SettingProviderInterface $provider
+     * @param SettingProvider $provider
      * @param bool $isMutable
      * @param mixed $value
      */
     public function __construct(
         string $settingName,
-        SettingProviderInterface $provider,
+        SettingProvider $provider,
         bool $isMutable,
         $value
     ) {
@@ -70,7 +69,7 @@ class SettingValue implements SettingValueInterface
     /**
      * @return string
      */
-    public function getName(): string
+    final public function getName(): string
     {
         return $this->settingName;
     }
@@ -78,7 +77,7 @@ class SettingValue implements SettingValueInterface
     /**
      * @return string
      */
-    public function getProviderName(): string
+    final public function getProviderName(): string
     {
         return $this->providerName;
     }
@@ -86,7 +85,7 @@ class SettingValue implements SettingValueInterface
     /**
      * @return bool
      */
-    public function isMutable(): bool
+    final public function isMutable(): bool
     {
         return $this->isMutable;
     }
@@ -94,7 +93,7 @@ class SettingValue implements SettingValueInterface
     /**
      * @return mixed
      */
-    public function getValue()
+    final public function getValue()
     {
         return $this->value;
     }

@@ -19,7 +19,7 @@ declare(strict_types=1);
 namespace SettingsManager\Provider;
 
 use SettingsManager\AbstractSettingsProviderTest;
-use SettingsManager\Contract\SettingProviderInterface;
+use SettingsManager\Contract\SettingProvider;
 use SettingsManager\Exception\ImmutableSettingOverrideException;
 
 /**
@@ -64,9 +64,9 @@ class CascadingSettingProviderTest extends AbstractSettingsProviderTest
     }
 
     /**
-     * @return SettingProviderInterface|CascadingSettingProvider
+     * @return SettingProvider|CascadingSettingProvider
      */
-    protected function getProviderInstance(): SettingProviderInterface
+    protected function getProviderInstance(): SettingProvider
     {
         $definitions = $this->buildDefinitions();
 

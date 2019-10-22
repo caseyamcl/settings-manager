@@ -19,9 +19,8 @@ declare(strict_types=1);
 namespace SettingsManager\Provider;
 
 use SettingsManager\Behavior\SettingProviderTrait;
-use SettingsManager\Contract\SettingRepositoryInterface;
-use SettingsManager\Contract\SettingProviderInterface;
-use SettingsManager\Contract\SettingValueInterface;
+use SettingsManager\Contract\SettingRepository;
+use SettingsManager\Contract\SettingProvider;
 use SettingsManager\Model\SettingValue;
 
 /**
@@ -31,12 +30,12 @@ use SettingsManager\Model\SettingValue;
  *
  * @author Casey McLaughlin <caseyamcl@gmail.com>
  */
-class SettingRepositoryProvider implements SettingProviderInterface
+class SettingRepositoryProvider implements SettingProvider
 {
     use SettingProviderTrait;
 
     /**
-     * @var SettingRepositoryInterface
+     * @var SettingRepository
      */
     private $repository;
 
@@ -53,12 +52,12 @@ class SettingRepositoryProvider implements SettingProviderInterface
     /**
      * DoctrineOrmProvider constructor.
      *
-     * @param SettingRepositoryInterface $repository
+     * @param SettingRepository $repository
      * @param string $name
      * @param string $description
      */
     public function __construct(
-        SettingRepositoryInterface $repository,
+        SettingRepository $repository,
         string $name = 'database',
         string $description = 'Settings stored in database'
     ) {
@@ -86,7 +85,7 @@ class SettingRepositoryProvider implements SettingProviderInterface
     /**
      * Return a key/value set of setting names/values
      *
-     * @return iterable|SettingValueInterface[]
+     * @return iterable|SettingValue[]
      */
     public function getSettingValues(): iterable
     {
@@ -97,7 +96,7 @@ class SettingRepositoryProvider implements SettingProviderInterface
         return $out ?? [];
     }
 
-    public function findValueInstance(string $settingName): ?SettingValueInterface
+    public function findValueInstance(string $settingName): ?SettingValue
     {
         return ($value = $this->repository->findValue($settingName))
             ? new SettingValue($settingName, $this, true, $value)

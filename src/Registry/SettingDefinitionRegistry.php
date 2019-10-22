@@ -22,7 +22,7 @@ use ArrayIterator;
 use Countable;
 use IteratorAggregate;
 use RuntimeException;
-use SettingsManager\Contract\SettingDefinitionInterface;
+use SettingsManager\Contract\SettingDefinition;
 use SettingsManager\Exception\SettingNameCollisionException;
 
 /**
@@ -31,13 +31,13 @@ use SettingsManager\Exception\SettingNameCollisionException;
 class SettingDefinitionRegistry implements IteratorAggregate, Countable
 {
     /**
-     * @var ArrayIterator|SettingDefinitionInterface[]
+     * @var ArrayIterator|SettingDefinition[]
      */
     private $items;
 
     /**
      * SettingDefinitionRegistry constructor.
-     * @param iterable|SettingDefinitionInterface[]|null $items
+     * @param iterable|SettingDefinition[]|null $items
      */
     public function __construct(?iterable $items = [])
     {
@@ -52,16 +52,16 @@ class SettingDefinitionRegistry implements IteratorAggregate, Countable
      * @param string $name
      * @return bool
      */
-    public function has(string $name): bool
+    final public function has(string $name): bool
     {
-        return array_key_exists($name, $this->items);
+        return $this->items->offsetExists($name);
     }
 
     /**
      * @param string $name
-     * @return SettingDefinitionInterface
+     * @return SettingDefinition
      */
-    public function get(string $name): SettingDefinitionInterface
+    final public function get(string $name): SettingDefinition
     {
         if ($this->has($name)) {
             return $this->items[$name];
@@ -73,10 +73,10 @@ class SettingDefinitionRegistry implements IteratorAggregate, Countable
     /**
      * Add a setting definition to the registry
      *
-     * @param SettingDefinitionInterface $setting
+     * @param SettingDefinition $setting
      * @return SettingDefinitionRegistry
      */
-    public function add(SettingDefinitionInterface $setting): self
+    final public function add(SettingDefinition $setting): self
     {
         if ($this->items->offsetExists($setting->getName()) && $setting !== $this->items[$setting->getName()]) {
             throw SettingNameCollisionException::fromName($setting->getName());
@@ -87,7 +87,7 @@ class SettingDefinitionRegistry implements IteratorAggregate, Countable
     }
 
     /**
-     * @return ArrayIterator|SettingDefinitionInterface[]
+     * @return ArrayIterator|SettingDefinition[]
      */
     public function getIterator(): ArrayIterator
     {

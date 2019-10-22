@@ -19,7 +19,7 @@ declare(strict_types=1);
 namespace SettingsManager\Provider;
 
 use SettingsManager\AbstractSettingsProviderTest;
-use SettingsManager\Contract\SettingProviderInterface;
+use SettingsManager\Contract\SettingProvider;
 use SettingsManager\Fixture\TestSettingRepository;
 use SettingsManager\Model\SettingValue;
 
@@ -43,9 +43,9 @@ class SettingRepositoryProviderTest extends AbstractSettingsProviderTest
     }
 
     /**
-     * @return SettingProviderInterface
+     * @return SettingProvider
      */
-    protected function getProviderInstance(): SettingProviderInterface
+    protected function getProviderInstance(): SettingProvider
     {
         $repo = new TestSettingRepository();
         $provider = new SettingRepositoryProvider($repo);

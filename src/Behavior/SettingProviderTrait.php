@@ -18,8 +18,8 @@ declare(strict_types=1);
 
 namespace SettingsManager\Behavior;
 
-use SettingsManager\Contract\SettingValueInterface;
 use SettingsManager\Exception\SettingValueNotFoundException;
+use SettingsManager\Model\SettingValue;
 
 /**
  * Trait SettingProviderTrait
@@ -32,9 +32,9 @@ trait SettingProviderTrait
      * Get a value for setting or throw exception
      *
      * @param string $settingName
-     * @return SettingValueInterface
+     * @return SettingValue
      */
-    public function getValueInstance(string $settingName): SettingValueInterface
+    public function getValueInstance(string $settingName): SettingValue
     {
         if ($value = $this->findValueInstance($settingName)) {
             return $value;
@@ -73,7 +73,7 @@ trait SettingProviderTrait
      * Find a setting value instance
      *
      * @param string $settingName
-     * @return SettingValueInterface|null
+     * @return SettingValue|null
      */
-    abstract public function findValueInstance(string $settingName): ?SettingValueInterface;
+    abstract public function findValueInstance(string $settingName): ?SettingValue;
 }

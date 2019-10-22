@@ -23,7 +23,7 @@ namespace SettingsManager\Contract;
  *
  * @package SettingsManager\Contract
  */
-interface SettingRepositoryInterface
+interface SettingRepository
 {
     /**
      * Find a setting value by its name or NULL if it is not found

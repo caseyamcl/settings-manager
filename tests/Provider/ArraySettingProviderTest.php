@@ -19,7 +19,7 @@ declare(strict_types=1);
 namespace SettingsManager\Provider;
 
 use SettingsManager\AbstractSettingsProviderTest;
-use SettingsManager\Contract\SettingProviderInterface;
+use SettingsManager\Contract\SettingProvider;
 
 /**
  * Class ArraySettingProviderTest
@@ -38,9 +38,9 @@ class ArraySettingProviderTest extends AbstractSettingsProviderTest
     }
 
     /**
-     * @return SettingProviderInterface
+     * @return SettingProvider
      */
-    protected function getProviderInstance(): SettingProviderInterface
+    protected function getProviderInstance(): SettingProvider
     {
         $values = [
             'string_setting'  => 'test',

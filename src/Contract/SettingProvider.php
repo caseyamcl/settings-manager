@@ -19,11 +19,12 @@ declare(strict_types=1);
 namespace SettingsManager\Contract;
 
 use SettingsManager\Exception\SettingValueNotFoundException;
+use SettingsManager\Model\SettingValue;
 
 /**
  * Settings provider interface
  */
-interface SettingProviderInterface
+interface SettingProvider
 {
     /**
      * @return string
@@ -38,7 +39,7 @@ interface SettingProviderInterface
     /**
      * Return a key/value set of setting names/values
      *
-     * @return iterable|SettingValueInterface[]
+     * @return iterable|SettingValue[]
      */
     public function getSettingValues(): iterable;
 
@@ -46,9 +47,9 @@ interface SettingProviderInterface
      * Find a setting instance or return NULL
      *
      * @param string $settingName
-     * @return SettingProviderInterface|null
+     * @return SettingValue|null
      */
-    public function findValueInstance(string $settingName): ?SettingValueInterface;
+    public function findValueInstance(string $settingName): ?SettingValue;
 
     /**
      * Find a setting value or return NULL
@@ -62,10 +63,10 @@ interface SettingProviderInterface
      * Get a setting instance or throw an exception
      *
      * @param string $settingName
-     * @return SettingValueInterface
+     * @return SettingValue
      * @throws SettingValueNotFoundException
      */
-    public function getValueInstance(string $settingName): SettingValueInterface;
+    public function getValueInstance(string $settingName): SettingValue;
 
     /**
      * Get a setting value or throw exception

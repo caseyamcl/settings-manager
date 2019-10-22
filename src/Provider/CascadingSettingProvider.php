@@ -18,9 +18,9 @@ declare(strict_types=1);
 
 namespace SettingsManager\Provider;
 
+use SettingsManager\Model\SettingValue;
 use SettingsManager\Behavior\SettingProviderTrait;
-use SettingsManager\Contract\SettingProviderInterface;
-use SettingsManager\Contract\SettingValueInterface;
+use SettingsManager\Contract\SettingProvider;
 use SettingsManager\Exception\ImmutableSettingOverrideException;
 
 /**
@@ -30,27 +30,27 @@ use SettingsManager\Exception\ImmutableSettingOverrideException;
  *
  * @author Casey McLaughlin <caseyamcl@gmail.com>
  */
-class CascadingSettingProvider implements SettingProviderInterface
+class CascadingSettingProvider implements SettingProvider
 {
     use SettingProviderTrait;
 
     /**
-     * @var array|SettingProviderInterface[]
+     * @var array|SettingProvider[]
      */
     private $providers;
 
     /**
-     * @var array|SettingValueInterface[]
+     * @var array|SettingValue[]
      */
     private $valuesCache = [];
 
     /**
      * Alternate constructor
      *
-     * @param SettingProviderInterface[] $provider
+     * @param SettingProvider[] $provider
      * @return CascadingSettingProvider
      */
-    public static function build(SettingProviderInterface ...$provider): self
+    public static function build(SettingProvider ...$provider): self
     {
         return new static($provider);
     }
@@ -66,7 +66,7 @@ class CascadingSettingProvider implements SettingProviderInterface
         }
     }
 
-    private function add(SettingProviderInterface $provider)
+    private function add(SettingProvider $provider)
     {
         $this->providers[$provider->getName()] = $provider;
 
@@ -107,7 +107,7 @@ class CascadingSettingProvider implements SettingProviderInterface
     /**
      * Return a key/value set of setting names/values
      *
-     * @return iterable|SettingValueInterface[]
+     * @return iterable|SettingValue[]
      */
     public function getSettingValues(): iterable
     {
@@ -116,9 +116,9 @@ class CascadingSettingProvider implements SettingProviderInterface
 
     /**
      * @param string $name
-     * @return SettingProviderInterface|null
+     * @return SettingProvider|null
      */
-    public function findValueInstance(string $name): ?SettingValueInterface
+    public function findValueInstance(string $name): ?SettingValue
     {
         return $this->getSettingValues()[$name] ?? null;
     }
@@ -126,10 +126,10 @@ class CascadingSettingProvider implements SettingProviderInterface
     /**
      * Clone this, adding a provider to the cloned instance
      *
-     * @param SettingProviderInterface $provider
+     * @param SettingProvider $provider
      * @return $this
      */
-    public function withProvider(SettingProviderInterface $provider): self
+    public function withProvider(SettingProvider $provider): self
     {
         $that = clone $this;
         $that->add($provider);

@@ -19,7 +19,7 @@ declare(strict_types=1);
 namespace SettingsManager;
 
 use PHPUnit\Framework\TestCase;
-use SettingsManager\Contract\SettingProviderInterface;
+use SettingsManager\Contract\SettingProvider;
 use SettingsManager\Exception\SettingNameCollisionException;
 use SettingsManager\Exception\SettingValueNotFoundException;
 use SettingsManager\Fixture\DecimalSetting;
@@ -140,7 +140,7 @@ abstract class AbstractSettingsProviderTest extends TestCase
 
 
     /**
-     * @return SettingProviderInterface
+     * @return SettingProvider
      */
-    abstract protected function getProviderInstance(): SettingProviderInterface;
+    abstract protected function getProviderInstance(): SettingProvider;
 }

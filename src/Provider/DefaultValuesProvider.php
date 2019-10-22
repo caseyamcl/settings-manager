@@ -19,8 +19,7 @@ declare(strict_types=1);
 namespace SettingsManager\Provider;
 
 use SettingsManager\Behavior\SettingProviderTrait;
-use SettingsManager\Contract\SettingProviderInterface;
-use SettingsManager\Contract\SettingValueInterface;
+use SettingsManager\Contract\SettingProvider;
 use SettingsManager\Model\SettingValue;
 use SettingsManager\Registry\SettingDefinitionRegistry;
 
@@ -31,7 +30,7 @@ use SettingsManager\Registry\SettingDefinitionRegistry;
  *
  * @author Casey McLaughlin <caseyamcl@gmail.com>
  */
-class DefaultValuesProvider implements SettingProviderInterface
+class DefaultValuesProvider implements SettingProvider
 {
     use SettingProviderTrait;
 
@@ -68,18 +67,20 @@ class DefaultValuesProvider implements SettingProviderInterface
     /**
      * Return a key/value set of setting names/values
      *
-     * @return iterable|SettingValueInterface[]
+     * @return iterable|SettingValue[]
      */
     public function getSettingValues(): iterable
     {
+        $out = [];
+
         foreach ($this->registry->getIterator() as $setting) {
             $out[$setting->getName()] = new SettingValue($setting->getName(), $this, true, $setting->getDefault());
         }
 
-        return $out ?? [];
+        return $out;
     }
 
-    public function findValueInstance(string $settingName): ?SettingValueInterface
+    public function findValueInstance(string $settingName): ?SettingValue
     {
         return ($this->getSettingValues()[$settingName]) ?? null;
     }

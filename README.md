@@ -31,8 +31,8 @@ and settings (available in the app; changeable by users during runtime):
 
 ## Concepts
 
-A **Setting** is simply a PHP class that implements the `SettingDefinitionInterface` interface.
-A setting has the following attributes:
+A **Setting Definition** is simply a PHP class that implements the 
+`SettingDefinition` interface.  A setting definition has the following attributes:
 
 * A name (e.g. a machine name/slug)
 * A display name
@@ -41,7 +41,13 @@ A setting has the following attributes:
 * Optional validation/transform logic for processing incoming values
 
 A **Setting Provider** is a service class that loads setting values.  Multiple providers can be chained together so that
-setting values are loaded in a cascading way.
+setting values are loaded in a cascading way.  Several providers have been bundled (see below), but you can feel free to add
+your own by extending the `SettingProvider` interface.  Providers have similar attributes to definitions:
+
+* A name (e.g. a machine name/slug)
+* A display name
+
+A **Setting Value** is a 
 
 ## Install
 
