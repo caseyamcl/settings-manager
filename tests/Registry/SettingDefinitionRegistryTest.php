@@ -61,7 +61,7 @@ class SettingDefinitionRegistryTest extends TestCase
     public function testGetThrowsExceptionWhenDefinitionDoesNotExist()
     {
         $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage("Setting not found: ");
+        $this->expectExceptionMessage("Setting definition not found: ");
         $registry = new SettingDefinitionRegistry();
         $registry->get(StringSetting::NAME);
     }

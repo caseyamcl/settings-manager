@@ -4,6 +4,13 @@ All notable changes to *Settings Manager* will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## UNRELEASED
+### Added
+- New exception: `SettingDefinitionNotFoundException` (thrown when attempting to get a definition from the registry that doesn't exist)
+### Changed
+- Name: `AbstractSettingTest` -> `AbstractSettingDefinitionTest`
+- Removed unnecessary lines from `AbstractSettingDefinitionTest`
+
 ## [0.9] - 2019-10-22
 ### Added
 - `SettingProviderInterface::findValue()` shortcut method to get the value directly

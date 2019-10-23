@@ -42,10 +42,10 @@ A **Setting Definition** is simply a PHP class that implements the
 
 Setting definitions are added to the `SettingDefinitionRegistry`.
 
-A **Setting Provider** is a service class that loads setting values from a source.  Sources can be 
+A **Setting Provider** is a service class that loads setting values from a source.  Sources can be configuration files,
+databases, or really anything.  See [usage](#usage) section below for a list of bundled providers.
 
-Multiple providers can be chained together so that
-setting values are loaded in a cascading way.  Several providers have been bundled (see below), but you can feel free to add
+Multiple providers can be chained together so that setting values are loaded in a cascading way.  Several providers have been bundled (see below), but you can feel free to add
 your own by extending the `SettingProvider` interface.  Providers have similar attributes to definitions:
 
 * A name (e.g. a machine name/slug)
@@ -67,7 +67,13 @@ $ composer require caseyamcl/settings-manager
 
 ## Usage
 
-TODO: Usage
+TODO: Basic usage (adding setting definitions and loading values)
+
+TODO: bundled providers
+
+TODO: creating your own provider implementation
+
+TODO: handling exceptions (all implement the `SettingException` interface)
 
 ## Change log
 

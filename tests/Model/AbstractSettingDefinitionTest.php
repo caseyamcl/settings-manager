@@ -7,17 +7,12 @@ namespace SettingsManager\Model;
 use LogicException;
 use PHPUnit\Framework\TestCase;
 
-class AbstractSettingTest extends TestCase
+class AbstractSettingDefinitionTest extends TestCase
 {
     public function testIsSensitive()
     {
         $obj = new class extends AbstractSettingDefinition {
             public const SENSITIVE = false;
-
-            public function processValue($value)
-            {
-                return $value;
-            }
         };
 
         $this->assertFalse($obj->isSensitive());
@@ -27,11 +22,6 @@ class AbstractSettingTest extends TestCase
     {
         $obj = new class extends AbstractSettingDefinition {
             public const NOTES = 'test';
-
-            public function processValue($value)
-            {
-                return $value;
-            }
         };
 
         $this->assertSame('test', $obj->getNotes());
@@ -41,11 +31,6 @@ class AbstractSettingTest extends TestCase
     {
         $obj = new class extends AbstractSettingDefinition {
             public const NAME = 'test';
-
-            public function processValue($value)
-            {
-                return $value;
-            }
         };
 
         $this->assertSame('test', $obj->getName());
@@ -57,10 +42,7 @@ class AbstractSettingTest extends TestCase
         $this->expectExceptionMessage('must implement constant');
 
         $obj = new class extends AbstractSettingDefinition {
-            public function processValue($value)
-            {
-                return $value;
-            }
+            // NAME constant purposefully omitted
         };
 
         $obj->getName();
@@ -70,11 +52,6 @@ class AbstractSettingTest extends TestCase
     {
         $obj = new class extends AbstractSettingDefinition {
             public const DEFAULT = 'test';
-
-            public function processValue($value)
-            {
-                return $value;
-            }
         };
 
         $this->assertSame('test', $obj->getDefault());
@@ -84,11 +61,6 @@ class AbstractSettingTest extends TestCase
     {
         $obj = new class extends AbstractSettingDefinition {
             public const DISPLAY_NAME = 'test';
-
-            public function processValue($value)
-            {
-                return $value;
-            }
         };
 
         $this->assertSame('test', $obj->getDisplayName());
@@ -100,12 +72,18 @@ class AbstractSettingTest extends TestCase
         $this->expectExceptionMessage('must implement constant');
 
         $obj = new class extends AbstractSettingDefinition {
-            public function processValue($value)
-            {
-                return $value;
-            }
+            // DISPLAY_NAME constant purposefully omitted
         };
 
         $obj->getDisplayName();
+    }
+
+    public function testDefaultImplementationReturnsTheSameValueAsWasPassed()
+    {
+        $obj = new class extends AbstractSettingDefinition {
+            public const NAME = 'test';
+            public const DISPLAY_NAME = 'Test setting';
+        };
+        $this->assertSame('test', $obj->processValue('test'));
     }
 }

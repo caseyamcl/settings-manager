@@ -21,8 +21,8 @@ namespace SettingsManager\Registry;
 use ArrayIterator;
 use Countable;
 use IteratorAggregate;
-use RuntimeException;
 use SettingsManager\Contract\SettingDefinition;
+use SettingsManager\Exception\SettingDefinitionNotFoundException;
 use SettingsManager\Exception\SettingNameCollisionException;
 
 /**
@@ -66,7 +66,7 @@ class SettingDefinitionRegistry implements IteratorAggregate, Countable
         if ($this->has($name)) {
             return $this->items[$name];
         } else {
-            throw new RuntimeException("Setting not found: " . $name);
+            throw SettingDefinitionNotFoundException::forSetting($name);
         }
     }
 
