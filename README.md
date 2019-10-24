@@ -67,13 +67,67 @@ $ composer require caseyamcl/settings-manager
 
 ## Usage
 
-TODO: Basic usage (adding setting definitions and loading values)
+### Basic Usage
+
+The basic usage of this library consists of two steps:
+
+1. Defining setting definitions
+2. Loading setting values from providers
+
+
+#### Defining setting definitions
+
+The recommended way to create settings is for each setting definition to be a class.  While this isn't strictly necessary
+(you can create a class that implements `AbstractSettingDefinition`), it does keep things clean and simple.
+
+```php
+<?php
+
+use SettingsManager\Model\AbstractSettingDefinition;
+use SettingsManager\Exception\InvalidSettingValueException;
+
+/**
+ * 
+ */
+class MySetting extends AbstractSettingDefinition
+{
+    // This is the machine name, and it is recommended that you stick to machine-friendly names (alpha-dash, underscore)
+    public const NAME = 'my_setting';
+    
+    // This is the "human friendly" name for the setting
+    public const DISPLAY_NAME = 'My Setting';
+    
+    // Internal notes for administrators
+    public const NOTES = '';
+    
+    // Set an optional default (may need to override the getDefault() method if complex logic is required)
+    public const DEFAULT = null;
+    
+    // Indicate whether this value is sensitive or not.  By default, this is set to TRUE
+    // This is relevant if the application wants to expose some setting values to all users, while hiding other ones
+    public const SENSITIVE = true;
+    
+    /**
+     * If there is any validation for this setting
+     */
+    public function processValue($value)
+    {
+        if (! is_string($value) OR $value !== 'test') {
+            throw new InvalidSettingValueException("Invalid setting value");
+        }
+        
+        return $value;
+    }
+}
+```
 
 TODO: bundled providers
 
 TODO: creating your own provider implementation
 
 TODO: handling exceptions (all implement the `SettingException` interface)
+
+TODO: Considerations for loading settings during runtime.
 
 ## Change log
 
