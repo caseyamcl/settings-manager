@@ -108,18 +108,32 @@ class MySetting extends AbstractSettingDefinition
     public const SENSITIVE = true;
     
     /**
-     * If there is any validation for this setting
+     * If there is any validation for this setting, you can override the processValue() method
+     * 
+     * Throw an InvalidSettingValueException in the case of an invalid value
      */
     public function processValue($value)
     {
-        if (! is_string($value) OR $value !== 'test') {
-            throw new InvalidSettingValueException("Invalid setting value");
+        if (! is_string($value)) {
+            $errors[] = "value must be a string";
+        }
+        if ($value !== 'test') {
+            $errors[] = "value must be equal to 'test'";
+        }
+    
+        if (! empty($errors)) {
+            throw new InvalidSettingValueException($errors);
         }
         
         return $value;
     }
 }
+
 ```
+
+#### Loading setting values from providers
+
+TODO: This.
 
 TODO: bundled providers
 
