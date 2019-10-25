@@ -35,7 +35,7 @@ class CascadingSettingProviderTest extends AbstractSettingsProviderTest
 
         $this->expectException(ImmutableSettingOverrideException::class);
         $this->expectExceptionMessage($msg);
-        $this->getProviderInstance()->withProvider(new ArraySettingProvider([
+        $this->getProviderInstance()->withProvider(new ArrayValuesProvider([
             'integer_setting' => 3
         ], $this->buildDefinitions(), 'test2', 'Test 2'));
     }
@@ -43,7 +43,7 @@ class CascadingSettingProviderTest extends AbstractSettingsProviderTest
     public function testWithProviderReturnsNewInstanceOfObject()
     {
         $original = $this->getProviderInstance();
-        $new = $original->withProvider(new ArraySettingProvider([
+        $new = $original->withProvider(new ArrayValuesProvider([
             'string_setting' => 'test3'
         ], $this->buildDefinitions(), 'test3', 'Test 3'));
 
@@ -70,7 +70,7 @@ class CascadingSettingProviderTest extends AbstractSettingsProviderTest
     {
         $definitions = $this->buildDefinitions();
 
-        $arrayProvider = new ArraySettingProvider(
+        $arrayProvider = new ArrayValuesProvider(
             ['integer_setting' => ['value' => 5, 'mutable' => false]],
             $definitions,
             'test',

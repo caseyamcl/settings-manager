@@ -19,6 +19,7 @@ declare(strict_types=1);
 namespace SettingsManager\Fixture;
 
 use SettingsManager\Contract\SettingRepository;
+use SettingsManager\Exception\SettingValueNotFoundException;
 use SettingsManager\Model\SettingValue;
 
 class TestSettingRepository implements SettingRepository
@@ -43,6 +44,22 @@ class TestSettingRepository implements SettingRepository
     {
         return (array_key_exists($settingName, $this->values)) ? $this->values[$settingName] : null;
     }
+
+    /**
+     * Get a setting value by its name
+     *
+     * @param string $settingName
+     * @return mixed
+     */
+    public function getValue(string $settingName)
+    {
+        if (array_key_exists($settingName, $this->values)) {
+            return $this->values[$settingName];
+        } else {
+            throw SettingValueNotFoundException::fromName($settingName);
+        }
+    }
+
 
     /**
      * List values

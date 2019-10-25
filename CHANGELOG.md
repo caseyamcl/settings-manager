@@ -6,9 +6,12 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## UNRELEASED
 ### Added
-- New exception: `SettingDefinitionNotFoundException` (thrown when attempting to get a definition from the registry that doesn't exist)
+- New exception: `UndefinedSettingException` (thrown when attempting to get a definition from the registry that doesn't exist)
+- Default parameter values for constructor in `ArrayValuesProvider`
+- New `getValue()` method to `SettingRepository` (throws exception on failure)
 ### Changed
-- Name: `AbstractSettingTest` -> `AbstractSettingDefinitionTest`
+- **BC BREAK** - Renamed `ArraySettingProvider` -> `ArrayValuesProvider`
+- Test Name: `AbstractSettingTest` -> `AbstractSettingDefinitionTest`
 - Removed unnecessary lines from `AbstractSettingDefinitionTest`
 
 ## [0.9] - 2019-10-22

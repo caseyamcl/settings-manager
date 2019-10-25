@@ -26,7 +26,7 @@ use SettingsManager\Contract\SettingProvider;
  *
  * @author Casey McLaughlin <caseyamcl@gmail.com>
  */
-class ArraySettingProviderTest extends AbstractSettingsProviderTest
+class ArrayValuesProviderTest extends AbstractSettingsProviderTest
 {
     protected function getExpectedValues(): array
     {
@@ -48,6 +48,6 @@ class ArraySettingProviderTest extends AbstractSettingsProviderTest
             'decimal_setting' => 29.5
         ];
 
-        return new ArraySettingProvider($values, $this->buildDefinitions(), 'test', 'Test');
+        return new ArrayValuesProvider($values, $this->buildDefinitions(), 'test', 'Test');
     }
 }

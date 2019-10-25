@@ -26,7 +26,7 @@ use Throwable;
  *
  * @author Casey McLaughlin <caseyamcl@gmail.com>
  */
-class SettingDefinitionNotFoundException extends RuntimeException implements SettingException
+class UndefinedSettingException extends RuntimeException implements SettingException
 {
     /**
      * @param string $name

@@ -30,7 +30,7 @@ use SettingsManager\Registry\SettingDefinitionRegistry;
  *
  * @author Casey McLaughlin <caseyamcl@gmail.com>
  */
-class ArraySettingProvider implements SettingProvider
+class ArrayValuesProvider implements SettingProvider
 {
     use SettingProviderTrait;
 
@@ -60,8 +60,8 @@ class ArraySettingProvider implements SettingProvider
     public function __construct(
         array $settings,
         SettingDefinitionRegistry $definitionRegistry,
-        string $name,
-        string $displayName
+        string $name = 'array',
+        string $displayName = 'Array Values Provider'
     ) {
 
         $this->name = $name;

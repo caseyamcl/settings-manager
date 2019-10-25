@@ -66,7 +66,12 @@ class CascadingSettingProvider implements SettingProvider
         }
     }
 
-    private function add(SettingProvider $provider)
+    /**
+     * Add a setting provider
+     *
+     * @param SettingProvider $provider
+     */
+    private function add(SettingProvider $provider): void
     {
         $this->providers[$provider->getName()] = $provider;
 
