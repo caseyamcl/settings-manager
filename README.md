@@ -7,16 +7,17 @@
 [![Quality Score][ico-code-quality]][link-code-quality]
 [![Total Downloads][ico-downloads]][link-downloads]
 
-This is a framework-agnostic library that provides a structure for managing and storing user-changeable settings.
+This is a framework-agnostic library that provides an abstraction for managing and storing user-changeable settings.
 Settings can be stored in a configuration file, database, external API or anywhere else.  The defining characteristic
-of this library is that settings can be changed during runtime, which makes it particularly useful for increasingly popular
-architectures such as Swoole, React, etc.
+of this library is designed around the assumption that settings will be modified during runtime, which makes it particularly
+useful for increasingly popular architectures such as [Swoole](https://www.swoole.co.uk/), [React](https://reactphp.org/), etc.
 
-It provides the following common utilities:
+It provides the following features:
 
 * Class-based setting definitions
-* Ability to define multiple providers for settings and load in a cascading manner
-* Ability to validate and prepare/transform setting values 
+* Ability to define multiple providers for settings and load them in a cascading manner
+* Ability to validate and prepare/transform setting values
+* PSR-4 and PSR-12 compliance; 100% unit test coverage 
 
 ## What is a setting?
 
@@ -40,14 +41,15 @@ A **Setting Definition** is simply a PHP class that implements the
 * Internal notes
 * An optional default value
 * Optional validation/transform logic for processing incoming values
+* Whether or not this value is sensitive (e.g. should be treated securely)
 
 Setting definitions are added to an instance of the `SettingDefinitionRegistry`.
 
 A **Setting Provider** is a service class that loads setting values from a source.  Sources can be configuration files,
-databases, or really anything.  See [usage](#usage) section below for a list of bundled providers.
+databases, or really anything.  See the [usage](#usage) section below for a list of bundled providers.
 
 Multiple providers can be chained together so that setting values are loaded in a cascading way.  Several providers have been bundled (see below), but you can feel free to add
-your own by extending the `SettingProvider` interface.  Providers have similar attributes to definitions:
+your own by implementing the `SettingProvider` interface.  Providers have similar attributes to definitions:
 
 * A name (e.g. a machine name/slug)
 * A display name
@@ -56,7 +58,7 @@ A **Setting Value** is an object that stores the value of the setting, along wit
 
 * The setting name
 * The provider name that this setting came was defined by
-* Whether this setting can be overridden after this provider (e.g. an administrator may want to 
+* Mutability - whether this setting can be overridden after this provider (e.g. an administrator may want to 
   lock a setting in-place in a configuration file and not allow a downstream provider to change it)
 
 ## Install
@@ -71,20 +73,26 @@ $ composer require caseyamcl/settings-manager
 
 ### Basic Usage
 
-The basic usage of this library consists of two steps:
+Basic usage of this library consists of two steps:
 
 1. Defining setting definitions
 2. Loading setting values from providers
 
 #### Defining setting definitions
 
-The recommended way to create settings is for each setting definition to be a class.  While this isn't strictly necessary
-(you can create a class that implements `AbstractSettingDefinition`), it does keep things clean and simple.
+The recommended way to create settings is for each setting definition to be its own class.  While this isn't strictly necessary
+(you can create any class that implements `SettingDefinition`), it does keep things clean and simple.
+
+For convenience, this library includes the `AbstractSettingDefinition` class, which includes constants
+for common attributes.  See the following example: 
 
 ```php
 
 use SettingsManager\Model\AbstractSettingDefinition;
 use SettingsManager\Exception\InvalidSettingValueException;
+use SettingsManager\Registry\SettingDefinitionRegistry;
+
+// 1. Create setting definition:
 
 /**
  * Settings must implement the SettingDefinition interface.
@@ -93,13 +101,13 @@ use SettingsManager\Exception\InvalidSettingValueException;
  */
 class MySetting extends AbstractSettingDefinition
 {
-    // This is the machine name, and it is recommended that you stick to machine-friendly names (alpha-dash, underscore)
+    // Required; This is the machine name, and it is recommended that you stick to machine-friendly names (alpha-dash, underscore)
     public const NAME = 'my_setting';
     
-    // This is the "human friendly" name for the setting
+    // Required; This is the "human friendly" name for the setting
     public const DISPLAY_NAME = 'My Setting';
     
-    // Internal notes
+    // Internal notes (optional)
     public const NOTES = "These are notes that are either available to all users or just admins (implementor's choice)";
     
     // Set an optional default (may need to override the getDefault() method if complex logic is required)
@@ -113,6 +121,9 @@ class MySetting extends AbstractSettingDefinition
      * If there is any validation for this setting, you can override the processValue() method
      * 
      * Throw an InvalidSettingValueException in the case of an invalid value
+     * 
+     * @param string $value
+     * @return string
      */
     public function processValue($value)
     {
@@ -124,6 +135,7 @@ class MySetting extends AbstractSettingDefinition
         }
     
         if (! empty($errors)) {
+            // InvalidSettingValueException allows for multiple error messages
             throw new InvalidSettingValueException($errors);
         }
         
@@ -131,24 +143,17 @@ class MySetting extends AbstractSettingDefinition
     }
 }
 
-```
-
-Add it to the registry:
-
-```php
-
-use SettingsManager\Registry\SettingDefinitionRegistry;
+// 2. Add it to the registry:
 
 $registry = new SettingDefinitionRegistry();
 $registry->add(new MySetting());
-// etc.
-
+// etc.  add more values...
 ```
 
 #### Loading setting values from providers
 
-Setting values are loaded from setting providers.  There are a few bundled providers included in this library, and you can create your
-own by implementing the `SettingsManager\Contract\SettingProvider` interface.
+Setting values are loaded from setting providers.  There are a few bundled providers 
+included in this library, and you can create your own by implementing the `SettingsManager\Contract\SettingProvider` interface.
 
 In this example, we use the `CascadingSettingProvider` to combine the functionality of
 the `DefaultValuesProvider` and the `ArrayValuesProvider`:
@@ -170,20 +175,25 @@ $settingValues = [
 
 // Setup the provider
 $provider = new CascadingSettingProvider([
-    new DefaultValuesProvider($registry),
-    new ArrayValuesProvider($settingValues, $registry), 
+    new DefaultValuesProvider($registry), // loads default values
+    new ArrayValuesProvider($settingValues, $registry), // loads values from an array
 ]);
 
-// `getValue` throws an exception if a given setting isn't defined 
-$provider->getValue('non_existent_value'); // Throws exception
-
-// NULL is returned when using `findValue()` that isn't defined
-$provider->findValue('non_existent_value'); // returns NULL
+// Get values from the provider..
+$provider->findValue('my_setting'); // returns 'test'
+$provider->getValue('my_setting'); // returns 'test' (would throw an exception if value isn't defined)
 
 // If you want to get the `SettingValue` instance (with metadata), use
 // `findValueInstance` or `getValueInstance`
 $provider->getValueInstance('my_setting')->getValue();
 $provider->findValueInstance('my_setting')->getValue();
+
+// `getValue` throws an exception if the requested setting isn't defined 
+$provider->getValue('non_existent_value'); // Throws UndefinedSettingException
+
+// `findValue()` returns NULL if the requested setting isn't defined
+$provider->findValue('non_existent_value'); // returns NULL
+
 ```
 
 ### Bundled providers
@@ -196,6 +206,62 @@ Basic setting providers are bundled with this library in the `SettingsManager\Pr
 | `DefaultValuesProvider`     | Loads default values                                   |
 | `CascadingSettingProvider`  | Loads from multiple providers                          |
 | `SettingRepositoryProvider` | Loads values from a database or repository (see below) |
+
+### Setting mutability
+
+Sometimes you want settings to be "locked" by a certain provider.  For example, if you want a setting to be unchangeable after a
+certain provider has loaded it (say, a configuration file), you can use the following syntax:
+
+```php
+
+use SettingsManager\Provider\ArrayValuesProvider;
+use SettingsManager\Provider\DefaultValuesProvider;
+use SettingsManager\Provider\SettingRepositoryProvider;
+use SettingsManager\Provider\CascadingSettingProvider;
+use SettingsManager\Registry\SettingDefinitionRegistry;
+use MyApp\MySettingRepository;
+use MyApp\SensitivePasswordSetting;
+
+// Setup a registry and add settings to it...
+$registry = new SettingDefinitionRegistry();
+$registry->add(new SensitivePasswordSetting());
+
+// Method #1 - Key/value pairs
+$values = [
+    'sensitive_password' => '11111',
+    'another_setting' => 123,
+    // etc..
+];
+
+// Method #2
+$values = [
+    'sensitive_password' => [
+        'value'   => '11111',
+        'mutable' => false // downstream providers won't be able to override this setting
+    ],
+    'another_setting' => [
+       'value'    => 123,
+       'mutable'  => true // downstream providers WILL be able to override this setting
+    ]
+];
+
+// Mix and match methods #1 and #2
+$values = [
+    'sensitive_password' => '11111',
+    'another_setting' => [
+       'value'    => 123,
+       'mutable'  => true    
+    ]
+];
+
+$provider = CascadingSettingProvider::build(
+    new DefaultValuesProvider($registry),
+    new ArrayValuesProvider($values, $registry, 'config_file'),
+    new SettingRepositoryProvider(new MySettingRepository())  
+);
+
+$provider->getValueInstance('sensitive_password')->getProviderName(); // will always be 'config_file'
+```
 
 ### Creating your own provider implementation using the `SettingRepositoryProvider`
 
@@ -278,45 +344,13 @@ Exceptions all implement the `SettingException` interface:
 | `SettingNameCollissionException`     | This is thrown when attempting to add two definitions to the registry with the same name |
 | `SettingValueNotFoundException`      | This is thrown when calling `getValue()` or `getValueInstance()` from a provider on a non-existent setting |
 
-### Setting mutability
-
-Sometimes you want settings to be "locked" by a certain provider.  For example, if you want a setting to be unchangeable after a
-certain provider has loaded it (say, a configuration file), you can use the following syntax:
-
-```php
-
-use SettingsManager\Provider\ArrayValuesProvider;
-use SettingsManager\Provider\SettingRepositoryProvider;
-use SettingsManager\Provider\CascadingSettingProvider;
-use SettingsManager\Registry\SettingDefinitionRegistry;
-use MyApp\MySettingRepository;
-use MyApp\SensitivePasswordSetting;
-
-// Setup a registry and add settings to it...
-$registry = new SettingDefinitionRegistry();
-$registry->add(new SensitivePasswordSetting());
-
-// Alternative syntax for setting values in an array provider
-$values = [
-    'sensitive_password' => [
-        'value'   => '111111',
-        'mutable' => false
-    ]
-];
-
-$provider = CascadingSettingProvider::build(
-  new ArrayValuesProvider($values, $registry, 'config_file'),
-  new SettingRepositoryProvider(new MySettingRepository())  
-);
-
-$provider->getValueInstance('sensitive_password')->getProviderName(); // will always be 'config_file'
-```
-
 ### Considerations for runtime environments
 
 This library facilitates environments such as those provided by Swoole or React in which
-setting values are updated at runtime.  Simply inject the provider in all of your service
-classes instead of the settings themselves.
+setting values are updated at runtime.
+
+If you want to enable this functionality, be sure to always inject whatever setting provider
+you are using in your service classes, and lookup settings **during runtime**.
 
 ```php
 use SettingsManager\Contract\SettingProvider;
@@ -339,7 +373,9 @@ class MyServiceClass {
     
     public function doSomethingThatRequiresLookingUpASetting(): void
     {
+        // Always lookup the setting value during runtime
         $settingValue = $this->settings->getValue('some_setting');
+        
         // do stuff here..
     }
 }
