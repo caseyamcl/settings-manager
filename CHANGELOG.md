@@ -4,7 +4,7 @@ All notable changes to *Settings Manager* will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
-## UNRELEASED
+## [1.0] - 2019-10-28
 ### Added
 - New exception: `UndefinedSettingException` (thrown when attempting to get a definition from the registry that doesn't exist)
 - Default parameter values for constructor in `ArrayValuesProvider`
