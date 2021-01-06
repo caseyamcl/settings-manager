@@ -33,14 +33,14 @@ class SettingDefinitionRegistryTest extends TestCase
             new DecimalSetting()
         ]);
 
-        $this->assertSame(2, count($registry));
+        $this->assertCount(2, $registry);
     }
 
     public function testAdd()
     {
         $registry = new SettingDefinitionRegistry();
         $registry->add(new StringSetting())->add(new IntegerSetting());
-        $this->assertSame(2, count($registry));
+        $this->assertCount(2, $registry);
     }
 
     public function testHas()
