@@ -90,7 +90,7 @@ abstract class AbstractSettingDefinition implements SettingDefinition
      * @param string $name
      * @return mixed
      */
-    final private function requireConstant(string $name)
+    private function requireConstant(string $name)
     {
         if ($constant = constant(get_called_class() . '::' . $name)) {
             return $constant;

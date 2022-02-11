@@ -4,6 +4,10 @@ All notable changes to *Settings Manager* will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## [1.1] - 2022-02-11
+### Fixed
+- PHP 8.0 compatibility: Removed `final` keyword from `AbstractSetting::requireConstant()`
+
 ## [1.0] - 2019-10-28
 ### Added
 - New exception: `UndefinedSettingException` (thrown when attempting to get a definition from the registry that doesn't exist)
