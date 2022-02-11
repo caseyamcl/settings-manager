@@ -4,13 +4,12 @@ All notable changes to *Settings Manager* will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
-## [1.1] - 2022-02-11
+## [1.0.1] - 2022-02-11
 ### Added
 - Support for PHP 8.0
-
+- Github Action to replace Travis-CI
 ### Fixed
 - PHP 8.0 compatibility: Removed `final` keyword from `AbstractSetting::requireConstant()`
-
 ### Changed
 - Upgraded to PHPUnit v9
 
