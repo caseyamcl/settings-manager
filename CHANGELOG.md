@@ -5,6 +5,9 @@ All notable changes to *Settings Manager* will be documented in this file.
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
 ## [1.1] - 2022-02-11
+### Added
+- Support for PHP 8.0
+
 ### Fixed
 - PHP 8.0 compatibility: Removed `final` keyword from `AbstractSetting::requireConstant()`
 
